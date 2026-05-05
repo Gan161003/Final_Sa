@@ -1308,7 +1308,7 @@ def run_sa_report():
     GREEN = PatternFill("solid", fgColor="FF70AD47")
     LIGHT_GREY = PatternFill("solid", fgColor="FF808080")
 
-    HEADER_FONT = Font(size=12,  color="FFFFFF")
+    HEADER_FONT = Font(size=12, color="FFFFFF", bold=True)
     BODY_FONT = Font(size=12)
     # bold=True,
     DETAIL_LABEL = Font(size=10, color="FFFFFF")
