@@ -853,9 +853,9 @@ def run_sa_report():
     for i in range(min(25, len(craft_raw))):
         row = craft_raw.iloc[i].astype(str).str.lower()
         # if "unique" in " ".join(row) and "planned" in " ".join(row):
-          row_text = " ".join(row.astype(str).str.lower())
+        row_text = " ".join(row.astype(str).str.lower())
 
-          if "unique" in row_text and "planned" in row_text:
+        if "unique" in row_text and "planned" in row_text:
             craft_header = i
             break
 
