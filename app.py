@@ -1587,40 +1587,39 @@ def run_sa_report():
             col_final = headers["% Final Delivery"]
             col_uk = headers["Unique Key"]
 
-            under = []
-            over = []
-            perfect = []
-
-            threshold = get_threshold(ws.title)
-
-            for r in range(DATA_START_ROW, last_data_row + 1):
-
-                val = ws.cell(r, col_final).value
-                uk = ws.cell(r, col_uk).value
+                under = []
                 
-                if val is None:
-                    continue
+                over = []
+                perfect = []
                 
-                # convert safely to float (same style as your numeric handling above)
-                try:
-                    val = float(val)
-                except:
-                    continue
+                threshold = get_threshold(ad_type)
                 
-                # normalize like Excel display (since you format as 0%)
-                val_check = round(val, 2)
+                for _, row in df.iterrows():
                 
-                # ✅ PERFECT DELIVERY
-                if val_check == 1:
-                    perfect.append(str(uk))
+                    val = row.get("% Final Delivery")
+                    uk = row.get("Unique Key")
                 
-                # 🔻 UNDER
-                elif val < (1 - threshold):
-                    under.append(str(uk))
+                    if pd.isna(val):
+                        continue
                 
-                # 🔺 OVER
-                elif val > (1 + threshold):
-                    over.append(str(uk))
+                    try:
+                        val = float(val)
+                    except:
+                        continue
+                
+                    val_check = round(val, 2)
+                
+                    # ✅ PERFECT
+                    if val_check == 1:
+                        perfect.append(str(uk))
+                
+                    # 🔻 UNDER
+                    elif val < (1 - threshold):
+                        under.append(str(uk))
+                
+                    # 🔺 OVER
+                    elif val > (1 + threshold):
+                        over.append(str(uk))
 
 
               
