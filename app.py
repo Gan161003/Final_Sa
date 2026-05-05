@@ -1594,32 +1594,44 @@ def run_sa_report():
 
                 val = ws.cell(r, col_final).value
                 uk = ws.cell(r, col_uk).value
-
-
+                
                 if val is None:
                     continue
                 
-                val_rounded = round(val, 2)
+                # convert safely to float (same style as your numeric handling above)
+                try:
+                    val = float(val)
+                except:
+                    continue
                 
-                if val_rounded == 1:
+                # normalize like Excel display (since you format as 0%)
+                val_check = round(val, 2)
+                
+                # ✅ PERFECT DELIVERY
+                if val_check == 1:
                     perfect.append(str(uk))
                 
+                # 🔻 UNDER
                 elif val < (1 - threshold):
                     under.append(str(uk))
                 
+                # 🔺 OVER
                 elif val > (1 + threshold):
                     over.append(str(uk))
 
+                # val = ws.cell(r, col_final).value
+                # uk = ws.cell(r, col_uk).value
+
                 
-                # if val is None:
-                #     continue
+                # # if val is None:
+                # #     continue
 
-                # # ✅ SAME LOGIC AS COLORING
-                # if val < (1 - threshold):
-                #     under.append(str(uk))
+                # # # ✅ SAME LOGIC AS COLORING
+                # # if val < (1 - threshold):
+                # #     under.append(str(uk))
 
-                # elif val > (1 + threshold):
-                #     over.append(str(uk))
+                # # elif val > (1 + threshold):
+                # #     over.append(str(uk))
 
             remarks = ["SA Remarks:"]
 
