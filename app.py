@@ -1389,7 +1389,8 @@ def run_sa_report():
             for c in range(1, ws.max_column + 1):
                 cell = ws.cell(r, c)
                 cell.font = BODY_FONT
-                cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+                # cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+                cell.alignment = CENTER
                 cell.border = BORDER
                         # 👉 Apply Indian number format
                 if isinstance(cell.value, (int, float)):
