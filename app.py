@@ -1476,9 +1476,9 @@ def run_sa_report():
             elif val > (1 + threshold):
                 ws.cell(r, col_final).fill = FILL_OVER
 
-            ws.cell(
-                r, col_kpi
-            ).font = FONT_GREEN if val and val >= (1 - threshold) else FONT_RED
+            # ws.cell(
+            #     r, col_kpi
+            # ).font = FONT_GREEN if val and val >= (1 - threshold) else FONT_RED
 
             dev = ws.cell(r, col_dev).value
             if dev is not None and abs(dev) > 0.02:
@@ -1618,7 +1618,19 @@ def run_sa_report():
         
                 # ✅ STEP 5: FORMAT (NO BACKGROUND as you said)
                 cell.number_format = "0%"
-                cell.font = Font(size=12)
+                    # APPLY COLOR BASED ON KPI
+                if kpi_value is not None:
+                
+                    if kpi_value >= (1 - threshold):
+                        font_color = "00B050"   # GREEN
+                    else:
+                        font_color = "FF0000"   # RED
+                
+                    cell.font = Font(size=12, color=font_color)
+                
+                else:
+                    cell.font = Font(size=12)
+                # cell.font = Font(size=12)
                 cell.alignment = Alignment(horizontal="center", vertical="center")
 
        
