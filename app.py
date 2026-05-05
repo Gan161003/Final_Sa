@@ -1391,6 +1391,9 @@ def run_sa_report():
                 cell.font = BODY_FONT
                 cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
                 cell.border = BORDER
+                        # 👉 Apply Indian number format
+                if isinstance(cell.value, (int, float)):
+                    cell.number_format = '#,##,##0'
 
     FILL_UNDER = PatternFill("solid", fgColor="FFC000")
     FILL_OVER = PatternFill("solid", fgColor="FFCCFF")
