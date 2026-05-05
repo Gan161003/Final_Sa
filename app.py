@@ -1599,8 +1599,9 @@ def run_sa_report():
                 if val is None:
                     continue
                 
-                # ✅ STRICT 100%
-                if val == 1:
+                val_rounded = round(val, 2)
+                
+                if val_rounded == 1:
                     perfect.append(str(uk))
                 
                 elif val < (1 - threshold):
