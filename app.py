@@ -1595,30 +1595,32 @@ def run_sa_report():
         
         for _, row in df.iterrows():
         
-            val = row.get("% Final Delivery")
-            uk = row.get("Unique Key")
+        val = ws.cell(r, col_final).value
+        uk = ws.cell(r, col_uk).value
         
-            if pd.isna(val):
-                continue
+        if val is None:
+            continue
         
-            try:
-                val = float(val)
-            except:
-                continue
+        # convert safely to float (same style as your numeric handling above)
+        try:
+            val = float(val)
+        except:
+            continue
         
-            val_check = round(val, 2)
+        # normalize like Excel display (since you format as 0%)
+        val_check = round(val, 2)
         
-            # ✅ PERFECT
-            if val_check == 1:
-                perfect.append(str(uk))
+        # ✅ PERFECT DELIVERY
+        if val_check == 1:
+            perfect.append(str(uk))
         
-            # 🔻 UNDER
-            elif val < (1 - threshold):
-                under.append(str(uk))
+        # 🔻 UNDER
+        elif val < (1 - threshold):
+            under.append(str(uk))
         
-            # 🔺 OVER
-            elif val > (1 + threshold):
-                over.append(str(uk))
+        # 🔺 OVER
+        elif val > (1 + threshold):
+            over.append(str(uk))
 
 
               
