@@ -1389,7 +1389,7 @@ def run_sa_report():
             for c in range(1, ws.max_column + 1):
                 cell = ws.cell(r, c)
                 cell.font = BODY_FONT
-                cell.alignment = CENTER
+                cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
                 cell.border = BORDER
 
     FILL_UNDER = PatternFill("solid", fgColor="FFC000")
