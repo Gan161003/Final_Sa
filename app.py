@@ -1523,7 +1523,14 @@ def run_sa_report():
                         total_row, col
                     ).value = f"=SUM({letter}{DATA_START_ROW}:{letter}{last_data_row})"
 
-           
+        for col_name in SUM_COLS:
+                if col_name in headers:
+                    col = headers[col_name]
+                    letter = get_column_letter(col)
+
+                    ws.cell(
+                        total_row, col
+                    ).value = f"=SUM({letter}{DATA_START_ROW}:{letter}{last_data_row})"
 
         # ===== % TOTALS AS AVERAGE (NOT SUM) =====
 
