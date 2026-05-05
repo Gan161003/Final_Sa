@@ -1618,7 +1618,7 @@ def run_sa_report():
         
                 # ✅ STEP 5: FORMAT (NO BACKGROUND as you said)
                 cell.number_format = "0%"
-                cell.font = Font(bold=True, size=14)
+                cell.font = Font(size=12)
                 cell.alignment = Alignment(horizontal="center", vertical="center")
 
        
