@@ -1634,7 +1634,7 @@ def run_sa_report():
 
                 # elif val > (1 + threshold):
                 #     over.append(str(uk))
-        remarks = ["SA Remarks:"]
+            remarks = ["SA Remarks:"]
             if perfect:
             remarks.append(
                 "KPI delivered for unique key" +
