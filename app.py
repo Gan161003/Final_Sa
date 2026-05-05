@@ -1523,41 +1523,7 @@ def run_sa_report():
                         total_row, col
                     ).value = f"=SUM({letter}{DATA_START_ROW}:{letter}{last_data_row})"
 
-            # ================= MERGE TOTAL KPI COLUMN =================
-
-                if ws.title != "Master":
-                
-                    headers = {cell.value: i+1 for i, cell in enumerate(ws[TABLE_HEADER_ROW])}
-                
-                    if "Total KPI Achieved" in headers:
-                
-                        col_kpi = headers["Total KPI Achieved"]
-                
-                        # Merge entire KPI column (data rows only)
-                        ws.merge_cells(
-                            start_row=DATA_START_ROW,
-                            end_row=last_data_row,
-                            start_column=col_kpi,
-                            end_column=col_kpi
-                        )
-                
-                        # Put TOTAL KPI value in merged cell
-                        total_kpi_value = ws.cell(total_row, col_kpi).value
-                
-                        main_cell = ws.cell(DATA_START_ROW, col_kpi)
-                        main_cell.value = total_kpi_value
-                
-                        # Center align
-                        main_cell.alignment = Alignment(
-                            horizontal="center",
-                            vertical="center"
-                        )
-                
-                        # Make it bold + bigger
-                        main_cell.font = Font(bold=True, size=14)
-                
-                        # Optional: Color highlight
-                        main_cell.fill = PatternFill("solid", fgColor="E2EFDA")  # light green
+           
 
         # ===== % TOTALS AS AVERAGE (NOT SUM) =====
 
