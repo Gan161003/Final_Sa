@@ -1485,10 +1485,15 @@ def run_sa_report():
                 ws.cell(r, col_dev).font = FONT_RED
 
         # Date formatting
+        # for col_name in ["Start Date", "End Date", "Live Date"]:
+        #     c = headers[col_name]
+        #     for r in range(DATA_START_ROW, ws.max_row + 1):
+        #         ws.cell(r, c).number_format = "DD-MMM-YY"
+
         for col_name in ["Start Date", "End Date", "Live Date"]:
             c = headers[col_name]
             for r in range(DATA_START_ROW, ws.max_row + 1):
-                ws.cell(r, c).number_format = "DD-MMM-YY"
+                ws.cell(r, c).number_format = "DD-MMM"
         
         
 
