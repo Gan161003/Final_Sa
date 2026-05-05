@@ -748,8 +748,8 @@ def run_sa_report():
             row_text = " ".join([
                 str(x).lower() for x in row.values if pd.notna(x)
             ])
-
-            if "unique" in " ".join(row) and "planned" in " ".join(row):
+            
+            if "unique" in row_text and "buy" in row_text:
                 header_row = i
                 break
 
@@ -1586,7 +1586,6 @@ def run_sa_report():
 
             under = []
             over = []
-            perfect = []
 
             threshold = get_threshold(ws.title)
 
@@ -1594,44 +1593,16 @@ def run_sa_report():
 
                 val = ws.cell(r, col_final).value
                 uk = ws.cell(r, col_uk).value
-                
+
                 if val is None:
                     continue
-                
-                # convert safely to float (same style as your numeric handling above)
-                try:
-                    val = float(val)
-                except:
-                    continue
-                
-                # normalize like Excel display (since you format as 0%)
-                val_check = round(val, 2)
-                
-                # ✅ PERFECT DELIVERY
-                if val_check == 1:
-                    perfect.append(str(uk))
-                
-                # 🔻 UNDER
-                elif val < (1 - threshold):
+
+                # ✅ SAME LOGIC AS COLORING
+                if val < (1 - threshold):
                     under.append(str(uk))
-                
-                # 🔺 OVER
+
                 elif val > (1 + threshold):
                     over.append(str(uk))
-
-                # val = ws.cell(r, col_final).value
-                # uk = ws.cell(r, col_uk).value
-
-                
-                # # if val is None:
-                # #     continue
-
-                # # # ✅ SAME LOGIC AS COLORING
-                # # if val < (1 - threshold):
-                # #     under.append(str(uk))
-
-                # # elif val > (1 + threshold):
-                # #     over.append(str(uk))
 
             remarks = ["SA Remarks:"]
 
