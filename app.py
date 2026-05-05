@@ -1586,6 +1586,7 @@ def run_sa_report():
 
             under = []
             over = []
+            perfect = []
 
             threshold = get_threshold(ws.title)
 
@@ -1594,15 +1595,30 @@ def run_sa_report():
                 val = ws.cell(r, col_final).value
                 uk = ws.cell(r, col_uk).value
 
+
                 if val is None:
                     continue
-
-                # ✅ SAME LOGIC AS COLORING
-                if val < (1 - threshold):
+                
+                # ✅ STRICT 100%
+                if val == 1:
+                    perfect.append(str(uk))
+                
+                elif val < (1 - threshold):
                     under.append(str(uk))
-
+                
                 elif val > (1 + threshold):
                     over.append(str(uk))
+
+                
+                # if val is None:
+                #     continue
+
+                # # ✅ SAME LOGIC AS COLORING
+                # if val < (1 - threshold):
+                #     under.append(str(uk))
+
+                # elif val > (1 + threshold):
+                #     over.append(str(uk))
 
             remarks = ["SA Remarks:"]
 
