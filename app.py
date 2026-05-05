@@ -1549,7 +1549,9 @@ def run_sa_report():
         ws.cell(total_row, col_pct_final).value = f"={L_actual}{total_row}/{L_craft_plan}{total_row}"
 
         # KPI Achieved
-        ws.cell(total_row, col_kpi).value = f"={get_column_letter(col_pct_final)}{total_row}"
+        # ws.cell(total_row, col_kpi).value = f"={get_column_letter(col_pct_final)}{total_row}"
+        # KPI Achieved (CORRECT LOGIC)
+        ws.cell(total_row,col_kpi).value = f"=SUM({L_actual}{DATA_START_ROW}:{L_actual}{last_data_row})/SUM({L_craft_plan}{DATA_START_ROW}:{L_craft_plan}{last_data_row})"
 
         # Deviation v1 vs CRAFT plan
         ws.cell(
@@ -1568,32 +1570,34 @@ def run_sa_report():
         ws.cell(total_row, col_dev_plan).number_format = "0%"
         ws.cell(total_row, col_dev_platform).number_format = "0.00%"
 
-        # ================= MERGE TOTAL KPI COLUMN (CORRECT PLACE) =================
         
-        if ws.title != "Master":
+
+        # # ================= MERGE TOTAL KPI COLUMN (CORRECT PLACE) =================
         
-            if "Total KPI Achieved" in headers:
+        # if ws.title != "Master":
         
-                col_kpi = headers["Total KPI Achieved"]
+        #     if "Total KPI Achieved" in headers:
         
-                # Merge KPI column (only data rows)
-                ws.merge_cells(
-                    start_row=DATA_START_ROW,
-                    end_row=last_data_row,
-                    start_column=col_kpi,
-                    end_column=col_kpi
-                )
+        #         col_kpi = headers["Total KPI Achieved"]
         
-                # Get total KPI value (NOW it's calculated)
-                total_kpi_value = ws.cell(total_row, col_kpi).value
+        #         # Merge KPI column (only data rows)
+        #         ws.merge_cells(
+        #             start_row=DATA_START_ROW,
+        #             end_row=last_data_row,
+        #             start_column=col_kpi,
+        #             end_column=col_kpi
+        #         )
         
-                main_cell = ws.cell(DATA_START_ROW, col_kpi)
-                main_cell.value = total_kpi_value
+        #         # Get total KPI value (NOW it's calculated)
+        #         total_kpi_value = ws.cell(total_row, col_kpi).value
         
-                # Styling
-                main_cell.alignment = Alignment(horizontal="center", vertical="center")
-                main_cell.font = Font(bold=True, size=14)
-                main_cell.fill = PatternFill("solid", fgColor="E2EFDA")
+        #         main_cell = ws.cell(DATA_START_ROW, col_kpi)
+        #         main_cell.value = total_kpi_value
+        
+        #         # Styling
+        #         main_cell.alignment = Alignment(horizontal="center", vertical="center")
+        #         main_cell.font = Font(bold=True, size=14)
+        #         main_cell.fill = PatternFill("solid", fgColor="E2EFDA")
 
 
             
