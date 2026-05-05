@@ -1593,7 +1593,7 @@ def run_sa_report():
         
         threshold = get_threshold(ad_type)
         
-            for r in range(DATA_START_ROW, last_data_row + 1):
+        for r in range(DATA_START_ROW, last_data_row + 1):
                 val = ws.cell(r, col_final).value
                 uk = ws.cell(r, col_uk).value
                 
