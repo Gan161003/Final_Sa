@@ -1593,34 +1593,33 @@ def run_sa_report():
         
         threshold = get_threshold(ad_type)
         
-        for _, row in df.iterrows():
-        
-        val = ws.cell(r, col_final).value
-        uk = ws.cell(r, col_uk).value
-        
-        if val is None:
-            continue
-        
-        # convert safely to float (same style as your numeric handling above)
-        try:
-            val = float(val)
-        except:
-            continue
-        
-        # normalize like Excel display (since you format as 0%)
-        val_check = round(val, 2)
-        
-        # ✅ PERFECT DELIVERY
-        if val_check == 1:
-            perfect.append(str(uk))
-        
-        # 🔻 UNDER
-        elif val < (1 - threshold):
-            under.append(str(uk))
-        
-        # 🔺 OVER
-        elif val > (1 + threshold):
-            over.append(str(uk))
+            for r in range(DATA_START_ROW, last_data_row + 1):
+                val = ws.cell(r, col_final).value
+                uk = ws.cell(r, col_uk).value
+                
+                if val is None:
+                    continue
+                
+                # convert safely to float (same style as your numeric handling above)
+                try:
+                    val = float(val)
+                except:
+                    continue
+                
+                # normalize like Excel display (since you format as 0%)
+                val_check = round(val, 2)
+                
+                # ✅ PERFECT DELIVERY
+                if val_check == 1:
+                    perfect.append(str(uk))
+                
+                # 🔻 UNDER
+                elif val < (1 - threshold):
+                    under.append(str(uk))
+                
+                # 🔺 OVER
+                elif val > (1 + threshold):
+                    over.append(str(uk))
 
 
               
