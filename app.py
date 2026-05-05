@@ -1570,19 +1570,41 @@ def run_sa_report():
         ws.cell(total_row, col_dev_plan).number_format = "0%"
         ws.cell(total_row, col_dev_platform).number_format = "0.00%"
 
-        # ================= MERGE TOTAL KPI COLUMN =================
+            # ================= FIXED KPI MERGE (FINAL) =================
 
         if ws.title != "Master":
         
-            if "Total KPI Achieved" in headers:
+            col_kpi = headers.get("Total KPI Achieved")
+            col_actual = headers.get("Actual Delivered Reporting SA")
+            col_craft_plan = headers.get("CRAFT Planned Delivery")
         
-                col_kpi = headers["Total KPI Achieved"]
+            if col_kpi and col_actual and col_craft_plan:
         
-                # ⚠️ IMPORTANT: clear existing row values first
+                # ✅ STEP 1: Calculate KPI manually (NOT Excel formula)
+                total_actual = 0
+                total_plan = 0
+        
+                for r in range(DATA_START_ROW, last_data_row + 1):
+                    a = ws.cell(r, col_actual).value
+                    p = ws.cell(r, col_craft_plan).value
+        
+                    try:
+                        if a:
+                            total_actual += float(a)
+                        if p:
+                            total_plan += float(p)
+                    except:
+                        continue
+        
+                kpi_value = None
+                if total_plan != 0:
+                    kpi_value = total_actual / total_plan
+        
+                # ✅ STEP 2: CLEAR column BEFORE merge
                 for r in range(DATA_START_ROW, last_data_row + 1):
                     ws.cell(r, col_kpi).value = None
         
-                # Merge KPI column
+                # ✅ STEP 3: MERGE
                 ws.merge_cells(
                     start_row=DATA_START_ROW,
                     end_row=last_data_row,
@@ -1590,46 +1612,18 @@ def run_sa_report():
                     end_column=col_kpi
                 )
         
-                # Take total KPI value
-                total_kpi_value = ws.cell(total_row, col_kpi).value
+                # ✅ STEP 4: SET VALUE
+                cell = ws.cell(DATA_START_ROW, col_kpi)
+                cell.value = kpi_value
         
-                main_cell = ws.cell(DATA_START_ROW, col_kpi)
-                main_cell.value = total_kpi_value
-        
-                # Styling (make it visible)
-                main_cell.alignment = Alignment(horizontal="center", vertical="center")
-                main_cell.font = Font(bold=True, size=14)
-                main_cell.number_format = "0%"
-                main_cell.fill = PatternFill("solid", fgColor="E2EFDA")
+                # ✅ STEP 5: FORMAT (NO BACKGROUND as you said)
+                cell.number_format = "0%"
+                cell.font = Font(bold=True, size=14)
+                cell.alignment = Alignment(horizontal="center", vertical="center")
 
+       
         
 
-        # # ================= MERGE TOTAL KPI COLUMN (CORRECT PLACE) =================
-        
-        # if ws.title != "Master":
-        
-        #     if "Total KPI Achieved" in headers:
-        
-        #         col_kpi = headers["Total KPI Achieved"]
-        
-        #         # Merge KPI column (only data rows)
-        #         ws.merge_cells(
-        #             start_row=DATA_START_ROW,
-        #             end_row=last_data_row,
-        #             start_column=col_kpi,
-        #             end_column=col_kpi
-        #         )
-        
-        #         # Get total KPI value (NOW it's calculated)
-        #         total_kpi_value = ws.cell(total_row, col_kpi).value
-        
-        #         main_cell = ws.cell(DATA_START_ROW, col_kpi)
-        #         main_cell.value = total_kpi_value
-        
-        #         # Styling
-        #         main_cell.alignment = Alignment(horizontal="center", vertical="center")
-        #         main_cell.font = Font(bold=True, size=14)
-        #         main_cell.fill = PatternFill("solid", fgColor="E2EFDA")
 
 
             
