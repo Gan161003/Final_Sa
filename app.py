@@ -1635,42 +1635,33 @@ def run_sa_report():
                 # elif val > (1 + threshold):
                 #     over.append(str(uk))
         remarks = ["SA Remarks:"]
-
-
-        
-        if perfect:
+            if perfect:
             remarks.append(
                 "KPI delivered for unique key" +
                 ("s " if len(perfect) > 1 else " ") +
                 ", ".join(perfect)
             )
         
-        if under:
-            remarks.append(
-                "KPI under delivered for unique key" +
-                ("s " if len(under) > 1 else " ") +
-                ", ".join(under)
-            )
-        
-        if over:
-            remarks.append(
-                "KPI over delivered for unique key" +
-                ("s " if len(over) > 1 else " ") +
-                " and ".join(over)
-            )
-            # if under:
-            #     remarks.append(
-            #         "KPI under delivered for unique key" +
-            #         ("s " if len(under) > 1 else " ") +
-            #         ", ".join(under)
-            #     )
 
-            # if over:
-            #     remarks.append(
-            #         "KPI over delivered for unique key" +
-            #         ("s " if len(over) > 1 else " ") +
-            #         " and ".join(over)
-            #     )
+            if under:
+                remarks.append(
+                    "KPI under delivered for unique key" +
+                    ("s " if len(under) > 1 else " ") +
+                    ", ".join(under)
+                )
+
+            if over:
+                remarks.append(
+                    "KPI over delivered for unique key" +
+                    ("s " if len(over) > 1 else " ") +
+                    " and ".join(over)
+                )
+            if perfect:
+            remarks.append(
+                "KPI delivered for unique key" +
+                ("s " if len(perfect) > 1 else " ") +
+                ", ".join(perfect)
+            )
 
             remarks_row = total_row + 2
 
