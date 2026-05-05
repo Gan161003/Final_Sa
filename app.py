@@ -1588,7 +1588,6 @@ def run_sa_report():
             col_uk = headers["Unique Key"]
 
                 under = []
-                
                 over = []
                 perfect = []
                 
