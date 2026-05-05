@@ -1570,6 +1570,38 @@ def run_sa_report():
         ws.cell(total_row, col_dev_plan).number_format = "0%"
         ws.cell(total_row, col_dev_platform).number_format = "0.00%"
 
+        # ================= MERGE TOTAL KPI COLUMN =================
+
+        if ws.title != "Master":
+        
+            if "Total KPI Achieved" in headers:
+        
+                col_kpi = headers["Total KPI Achieved"]
+        
+                # ⚠️ IMPORTANT: clear existing row values first
+                for r in range(DATA_START_ROW, last_data_row + 1):
+                    ws.cell(r, col_kpi).value = None
+        
+                # Merge KPI column
+                ws.merge_cells(
+                    start_row=DATA_START_ROW,
+                    end_row=last_data_row,
+                    start_column=col_kpi,
+                    end_column=col_kpi
+                )
+        
+                # Take total KPI value
+                total_kpi_value = ws.cell(total_row, col_kpi).value
+        
+                main_cell = ws.cell(DATA_START_ROW, col_kpi)
+                main_cell.value = total_kpi_value
+        
+                # Styling (make it visible)
+                main_cell.alignment = Alignment(horizontal="center", vertical="center")
+                main_cell.font = Font(bold=True, size=14)
+                main_cell.number_format = "0%"
+                main_cell.fill = PatternFill("solid", fgColor="E2EFDA")
+
         
 
         # # ================= MERGE TOTAL KPI COLUMN (CORRECT PLACE) =================
