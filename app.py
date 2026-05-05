@@ -1657,7 +1657,7 @@ def run_sa_report():
                     " and ".join(over)
                 )
             if perfect:
-            remarks.append(
+                remarks.append(
                 "KPI delivered for unique key" +
                 ("s " if len(perfect) > 1 else " ") +
                 ", ".join(perfect)
