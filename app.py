@@ -1587,38 +1587,38 @@ def run_sa_report():
             col_final = headers["% Final Delivery"]
             col_uk = headers["Unique Key"]
 
-                under = []
-                over = []
-                perfect = []
-                
-                threshold = get_threshold(ad_type)
-                
-                for _, row in df.iterrows():
-                
-                    val = row.get("% Final Delivery")
-                    uk = row.get("Unique Key")
-                
-                    if pd.isna(val):
-                        continue
-                
-                    try:
-                        val = float(val)
-                    except:
-                        continue
-                
-                    val_check = round(val, 2)
-                
-                    # ✅ PERFECT
-                    if val_check == 1:
-                        perfect.append(str(uk))
-                
-                    # 🔻 UNDER
-                    elif val < (1 - threshold):
-                        under.append(str(uk))
-                
-                    # 🔺 OVER
-                    elif val > (1 + threshold):
-                        over.append(str(uk))
+        under = []
+        over = []
+        perfect = []
+        
+        threshold = get_threshold(ad_type)
+        
+        for _, row in df.iterrows():
+        
+            val = row.get("% Final Delivery")
+            uk = row.get("Unique Key")
+        
+            if pd.isna(val):
+                continue
+        
+            try:
+                val = float(val)
+            except:
+                continue
+        
+            val_check = round(val, 2)
+        
+            # ✅ PERFECT
+            if val_check == 1:
+                perfect.append(str(uk))
+        
+            # 🔻 UNDER
+            elif val < (1 - threshold):
+                under.append(str(uk))
+        
+            # 🔺 OVER
+            elif val > (1 + threshold):
+                over.append(str(uk))
 
 
               
