@@ -748,10 +748,8 @@ def run_sa_report():
             row_text = " ".join([
                 str(x).lower() for x in row.values if pd.notna(x)
             ])
-                    
-            row_text = " ".join(row.astype(str).str.lower())
-            if "unique" in row_text and "planned" in row_text:
-            # if "unique" in row_text and "buy" in row_text:
+                   
+            if "unique" in row_text and "buy" in row_text:
                 header_row = i
                 break
 
