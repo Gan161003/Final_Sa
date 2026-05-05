@@ -1528,9 +1528,14 @@ def run_sa_report():
                     col = headers[col_name]
                     letter = get_column_letter(col)
 
-                    ws.cell(
-                        total_row, col
-                    ).value = f"=SUM({letter}{DATA_START_ROW}:{letter}{last_data_row})"
+                    # ws.cell(
+                    #     total_row, col
+                    # ).value = f"=SUM({letter}{DATA_START_ROW}:{letter}{last_data_row})"
+                    cell = ws.cell(total_row, col)
+                    cell.value = f"=SUM({letter}{DATA_START_ROW}:{letter}{last_data_row})"
+                
+                # 👉 APPLY INDIAN FORMAT
+                    cell.number_format = '#,##,##0'
         # ===== % TOTALS AS AVERAGE (NOT SUM) =====
 
         # ================= TOTAL % & DEVIATIONS — FROM TOTAL NUMBERS =================
