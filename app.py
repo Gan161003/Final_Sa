@@ -1582,99 +1582,83 @@ def run_sa_report():
 
 
 
+        
         if ws.title != "Master":
-
+        
             col_final = headers["% Final Delivery"]
             col_uk = headers["Unique Key"]
-
-        under = []
-        over = []
-        perfect = []
         
-        threshold = get_threshold(ad_type)
+            under = []
+            over = []
+            perfect = []
         
-        for r in range(DATA_START_ROW, last_data_row + 1):
+            threshold = get_threshold(ws.title)
+        
+            for r in range(DATA_START_ROW, last_data_row + 1):
+        
                 val = ws.cell(r, col_final).value
                 uk = ws.cell(r, col_uk).value
-                
+        
                 if val is None:
                     continue
-                
-                # convert safely to float (same style as your numeric handling above)
+        
+                # convert safely to float
                 try:
                     val = float(val)
                 except:
                     continue
-                
-                # normalize like Excel display (since you format as 0%)
+        
+                # normalize like Excel display
                 val_check = round(val, 2)
-                
+        
                 # ✅ PERFECT DELIVERY
                 if val_check == 1:
                     perfect.append(str(uk))
-                
+        
                 # 🔻 UNDER
                 elif val < (1 - threshold):
                     under.append(str(uk))
-                
+        
                 # 🔺 OVER
                 elif val > (1 + threshold):
                     over.append(str(uk))
-
-
-              
-                # val = ws.cell(r, col_final).value
-                # uk = ws.cell(r, col_uk).value
-
-                # if val is None:
-                #     continue
-
-                # # ✅ SAME LOGIC AS COLORING
-                # if val < (1 - threshold):
-                #     under.append(str(uk))
-
-                # elif val > (1 + threshold):
-                #     over.append(str(uk))
-            remarks = ["SA Remarks:"]
-            if perfect:
-              remarks.append(
-                "KPI delivered for unique key" +
-                ("s " if len(perfect) > 1 else " ") +
-                ", ".join(perfect)
-            )
         
-
+            # ================= REMARKS =================
+            remarks = ["SA Remarks:"]
+        
+            if perfect:
+                remarks.append(
+                    "KPI delivered for unique key" +
+                    ("s " if len(perfect) > 1 else " ") +
+                    ", ".join(perfect)
+                )
+        
             if under:
                 remarks.append(
                     "KPI under delivered for unique key" +
                     ("s " if len(under) > 1 else " ") +
                     ", ".join(under)
                 )
-
+        
             if over:
                 remarks.append(
                     "KPI over delivered for unique key" +
                     ("s " if len(over) > 1 else " ") +
                     " and ".join(over)
                 )
-            if perfect:
-                remarks.append(
-                "KPI delivered for unique key" +
-                ("s " if len(perfect) > 1 else " ") +
-                ", ".join(perfect)
-            )
-
+        
+            # ================= WRITE TO EXCEL =================
             remarks_row = total_row + 2
-
+        
             ws.merge_cells(
                 start_row=remarks_row,
                 start_column=1,
                 end_row=remarks_row,
                 end_column=ws.max_column
             )
-
+        
             ws.cell(remarks_row, 1).value = "\n".join(remarks)
-
+        
             ws.cell(remarks_row, 1).font = Font(size=10, italic=True)
             ws.cell(remarks_row, 1).alignment = Alignment(
                 horizontal="left",
