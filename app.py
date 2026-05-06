@@ -1446,8 +1446,11 @@ def run_sa_report():
 
                 for r in range(DATA_START_ROW, ws.max_row + 1):
                     cell = ws.cell(r, col_index)
-                    if cell.value is not None:
-                        cell.value = float(cell.value)
+
+                    if cell.value not in [None, "", "-"]:
+                       cell.value = float(cell.value)
+                    # if cell.value is not None:
+                    #     cell.value = float(cell.value)
                         cell.number_format = "0%"
 
         # -------- 2 Decimal % column --------
@@ -1458,8 +1461,10 @@ def run_sa_report():
                 DATA_START_ROW = TABLE_HEADER_ROW + 1
 
                 for r in range(DATA_START_ROW, ws.max_row + 1):
-                    cell = ws.cell(r, col_index)
-                    if cell.value is not None:
+                    if cell.value not in [None, "", "-"]:
+                       cell.value = float(cell.value)
+                    # cell = ws.cell(r, col_index)
+                    # if cell.value is not None:
                         cell.value = float(cell.value)
                         cell.number_format = "0.00%"
 
