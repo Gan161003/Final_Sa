@@ -1740,6 +1740,8 @@ def run_sa_report():
         
         # ================= PERFECT OUTER TABLE BORDER =================
         
+
+
         THICK_SIDE = Side(style="medium")
         
         # ===== TOP BORDER =====
@@ -1789,7 +1791,6 @@ def run_sa_report():
                 left=cell.border.left,
                 bottom=cell.border.bottom
             )
-
 
 
         
