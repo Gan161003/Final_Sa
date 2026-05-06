@@ -1657,13 +1657,12 @@ def run_sa_report():
             # ✅ FILL TOTAL ROW ONLY ACROSS TABLE (NOT FULL SHEET)
         
         last_table_col = ws.max_column   # this is your table width
-        
-                for c in range(1, last_table_col + 1):
-                    cell = ws.cell(total_row, c)
-                    cell.fill = DARK_BLUE
-                    cell.font = HEADER_FONT
-                    cell.alignment = CENTER
-                    cell.border = BORDER
+        for c in range(1, last_table_col + 1):
+                cell = ws.cell(total_row, c)
+                cell.fill = DARK_BLUE
+                cell.font = HEADER_FONT
+                cell.alignment = CENTER
+                cell.border = BORDER            
 
             
         
