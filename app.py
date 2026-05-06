@@ -1386,7 +1386,9 @@ def run_sa_report():
 
         # ===== Table body =====
         for r in range(data_row, ws.max_row + 1):
-            for c in range(1, ws.max_column + 1):
+            # for c in range(1, ws.max_column + 1):
+            last_col = len(headers)
+            for c in range(1, last_col + 1):        
                 cell = ws.cell(r, c)
                 cell.font = BODY_FONT
                 # cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
@@ -1666,7 +1668,9 @@ def run_sa_report():
 
             
         
-        # ================= MERGE GENRES + DIVIDER =================
+# ================= MERGE GENRES + DIVIDER =================
+
+        last_col = len(headers)
         
         if "Genres" in headers:
         
@@ -1702,13 +1706,15 @@ def run_sa_report():
                         )
         
                     # ===== THICK DIVIDER =====
-                    for c in range(1, ws.max_column + 1):
+                    for c in range(1, last_col + 1):
         
-                        ws.cell(r, c).border = Border(
+                        cell = ws.cell(r, c)
+        
+                        cell.border = Border(
                             top=THICK,
-                            left=THIN,
-                            right=THIN,
-                            bottom=THIN
+                            left=cell.border.left,
+                            right=cell.border.right,
+                            bottom=cell.border.bottom
                         )
         
                     start_row_merge = r
@@ -1731,51 +1737,58 @@ def run_sa_report():
                     vertical="center"
                 )
         
-        # ================= OUTER TABLE BORDER =================
+        
+        # ================= PERFECT OUTER TABLE BORDER =================
         
         THICK_SIDE = Side(style="medium")
         
-        # TOP BORDER
-        for c in range(1, ws.max_column + 1):
+        # ===== TOP BORDER =====
+        for c in range(1, last_col + 1):
         
-            ws.cell(TABLE_HEADER_ROW, c).border = Border(
+            cell = ws.cell(TABLE_HEADER_ROW, c)
+        
+            cell.border = Border(
                 top=THICK_SIDE,
-                left=THIN,
-                right=THIN,
-                bottom=THIN
+                left=cell.border.left,
+                right=cell.border.right,
+                bottom=cell.border.bottom
             )
         
-        # BOTTOM BORDER
-        for c in range(1, ws.max_column + 1):
+        # ===== BOTTOM BORDER =====
+        for c in range(1, last_col + 1):
         
-            ws.cell(total_row, c).border = Border(
+            cell = ws.cell(total_row, c)
+        
+            cell.border = Border(
                 bottom=THICK_SIDE,
-                left=THIN,
-                right=THIN,
-                top=THIN
+                left=cell.border.left,
+                right=cell.border.right,
+                top=cell.border.top
             )
         
-        # LEFT BORDER
+        # ===== LEFT BORDER =====
         for r in range(TABLE_HEADER_ROW, total_row + 1):
         
-            ws.cell(r, 1).border = Border(
+            cell = ws.cell(r, 1)
+        
+            cell.border = Border(
                 left=THICK_SIDE,
-                top=THIN,
-                right=THIN,
-                bottom=THIN
+                top=cell.border.top,
+                right=cell.border.right,
+                bottom=cell.border.bottom
             )
         
-        # RIGHT BORDER
+        # ===== RIGHT BORDER =====
         for r in range(TABLE_HEADER_ROW, total_row + 1):
         
-            ws.cell(r, ws.max_column).border = Border(
+            cell = ws.cell(r, last_col)
+        
+            cell.border = Border(
                 right=THICK_SIDE,
-                top=THIN,
-                left=THIN,
-                bottom=THIN
+                top=cell.border.top,
+                left=cell.border.left,
+                bottom=cell.border.bottom
             )
-
-
 
 
 
