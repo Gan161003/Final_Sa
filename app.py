@@ -253,7 +253,7 @@ def run_sa_report():
             "mapping": {
                 "Unique Key": ["unique"],
                 "Date": ["date"],
-                "Impressions": ["impressions"],
+                "Impressions": ["sum(views)"],
                 "Clicks": ["clickthroughs","clicks","sum(clicks)"],
                 "Views": ["views","sum(views)"],
                 "Spends": ["spend","cost"],
