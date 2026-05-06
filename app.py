@@ -1742,49 +1742,50 @@ def run_sa_report():
         
 
         THICK = Side(style="medium")
+            
         
-        # ===== HEADER ROW (FULL BOX) =====
-        for c in range(1, last_col + 1):
-        
-            ws.cell(TABLE_HEADER_ROW, c).border = Border(
-                top=THICK,
-                bottom=THICK,
-                left=THICK if c == 1 else THIN,
-                right=THICK if c == last_col else THIN
-            )
-        
-        # ===== TOTAL ROW (FULL BOX) =====
-        for c in range(1, last_col + 1):
-        
-            ws.cell(total_row, c).border = Border(
-                top=THICK,
-                bottom=THICK,
-                left=THICK if c == 1 else THIN,
-                right=THICK if c == last_col else THIN
-            )
-        
-        # ===== LEFT & RIGHT BODY BORDER =====
-        for r in range(TABLE_HEADER_ROW + 1, total_row):
-        
-            # LEFT SIDE
-            left_cell = ws.cell(r, 1)
-        
-            left_cell.border = Border(
-                left=THICK,
-                top=left_cell.border.top,
-                right=left_cell.border.right,
-                bottom=left_cell.border.bottom
-            )
-        
-            # RIGHT SIDE
-            right_cell = ws.cell(r, last_col)
-        
-            right_cell.border = Border(
-                right=THICK,
-                top=right_cell.border.top,
-                left=right_cell.border.left,
-                bottom=right_cell.border.bottom
-            )
+                # ===== HEADER ROW (FULL BOX) =====
+                for c in range(1, last_col + 1):
+                
+                    ws.cell(TABLE_HEADER_ROW, c).border = Border(
+                        top=THICK,
+                        bottom=THICK,
+                        left=THICK if c == 1 else THIN,
+                        right=THICK if c == last_col else THIN
+                    )
+                
+                # ===== TOTAL ROW (FULL BOX) =====
+                for c in range(1, last_col + 1):
+                
+                    ws.cell(total_row, c).border = Border(
+                        top=THICK,
+                        bottom=THICK,
+                        left=THICK if c == 1 else THIN,
+                        right=THICK if c == last_col else THIN
+                    )
+                
+                # ===== LEFT & RIGHT BODY BORDER =====
+                for r in range(TABLE_HEADER_ROW + 1, total_row):
+                
+                    # LEFT SIDE
+                    left_cell = ws.cell(r, 1)
+                
+                    left_cell.border = Border(
+                        left=THICK,
+                        top=left_cell.border.top,
+                        right=left_cell.border.right,
+                        bottom=left_cell.border.bottom
+                    )
+                
+                    # RIGHT SIDE
+                    right_cell = ws.cell(r, last_col)
+                
+                    right_cell.border = Border(
+                        right=THICK,
+                        top=right_cell.border.top,
+                        left=right_cell.border.left,
+                        bottom=right_cell.border.bottom
+                    )
         
         
                 
