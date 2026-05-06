@@ -1741,10 +1741,6 @@ def run_sa_report():
         # ================= PERFECT OUTER TABLE BORDER =================
         
 
-
-        THICK_SIDE = Side(style="medium")
-       # ================= FINAL PERFECT BORDER =================
-
         THICK = Side(style="medium")
         
         # ===== HEADER ROW (FULL BOX) =====
