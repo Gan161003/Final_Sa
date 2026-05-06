@@ -1390,6 +1390,8 @@ def run_sa_report():
             last_col = len(headers)
             for c in range(1, last_col + 1):        
                 cell = ws.cell(r, c)
+                if cell.value in [None, ""]:
+                        cell.value = "-"
                 cell.font = BODY_FONT
                 # cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
                 cell.alignment = CENTER
