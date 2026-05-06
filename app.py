@@ -1480,11 +1480,29 @@ def run_sa_report():
 
         for r in range(DATA_START_ROW, ws.max_row + 1):
 
-            val = ws.cell(r, col_final).value
+            # val = ws.cell(r, col_final).value
 
-            if val is None:
-                ws.cell(r, col_final).fill = FILL_NA
-            elif val < (1 - threshold):
+            # if val is None:
+            #     ws.cell(r, col_final).fill = FILL_NA
+            # elif val < (1 - threshold):
+        val = ws.cell(r, col_final).value
+        
+        # ✅ Skip blanks / dash
+        if val in [None, "", "-"]:
+            ws.cell(r, col_final).fill = FILL_NA
+            continue
+        
+        # ✅ Safe float conversion
+        try:
+            val = float(val)
+        except:
+            continue
+        
+        if val < (1 - threshold):
+            ws.cell(r, col_final).fill = FILL_UNDER
+        
+        elif val > (1 + threshold):
+            ws.cell(r, col_final).fill = FILL_OVER
                 ws.cell(r, col_final).fill = FILL_UNDER
             elif val > (1 + threshold):
                 ws.cell(r, col_final).fill = FILL_OVER
