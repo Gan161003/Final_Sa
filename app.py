@@ -1667,6 +1667,76 @@ def run_sa_report():
 
 
 
+
+
+
+                    # ================= MERGE GENRES + DIVIDER =================
+
+        if "Genres" in headers:
+
+            THICK = Side(style="medium")
+
+            col_genre = headers["Genres"]
+
+            start_row_merge = DATA_START_ROW
+            prev_value = ws.cell(DATA_START_ROW, col_genre).value
+
+            for r in range(DATA_START_ROW + 1, last_data_row + 1):
+
+                current_value = ws.cell(r, col_genre).value
+
+                # ===== NEW GENRE START =====
+                if current_value != prev_value:
+
+                    # ===== MERGE PREVIOUS BLOCK =====
+                    if start_row_merge < r - 1:
+
+                        ws.merge_cells(
+                            start_row=start_row_merge,
+                            end_row=r - 1,
+                            start_column=col_genre,
+                            end_column=col_genre
+                        )
+
+                        merged_cell = ws.cell(start_row_merge, col_genre)
+
+                        merged_cell.alignment = Alignment(
+                            horizontal="center",
+                            vertical="center"
+                        )
+
+                    # ===== THICK DIVIDER =====
+                    for c in range(1, ws.max_column + 1):
+
+                        ws.cell(r, c).border = Border(
+                            top=THICK,
+                            left=THIN,
+                            right=THIN,
+                            bottom=THIN
+                        )
+
+                    start_row_merge = r
+                    prev_value = current_value
+
+                    # ===== LAST MERGE =====
+                    if start_row_merge < last_data_row:
+        
+                        ws.merge_cells(
+                            start_row=start_row_merge,
+                            end_row=last_data_row,
+                            start_column=col_genre,
+                            end_column=col_genre
+                        )
+        
+                        merged_cell = ws.cell(start_row_merge, col_genre)
+        
+                        merged_cell.alignment = Alignment(
+                            horizontal="center",
+                            vertical="center"
+                        )
+
+
+
         
         if ws.title != "Master":
         
