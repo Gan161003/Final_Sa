@@ -1448,7 +1448,7 @@ def run_sa_report():
                     cell = ws.cell(r, col_index)
 
                     if cell.value not in [None, "", "-"]:
-                       cell.value = float(cell.value)
+                        cell.value = float(cell.value)
                     # if cell.value is not None:
                     #     cell.value = float(cell.value)
                         cell.number_format = "0%"
@@ -1462,7 +1462,7 @@ def run_sa_report():
 
                 for r in range(DATA_START_ROW, ws.max_row + 1):
                     if cell.value not in [None, "", "-"]:
-                       cell.value = float(cell.value)
+                        cell.value = float(cell.value)
                     # cell = ws.cell(r, col_index)
                     # if cell.value is not None:
                         cell.value = float(cell.value)
