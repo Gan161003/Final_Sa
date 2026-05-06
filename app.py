@@ -1743,57 +1743,55 @@ def run_sa_report():
 
 
         THICK_SIDE = Side(style="medium")
+       # ================= FINAL PERFECT BORDER =================
+
+        THICK = Side(style="medium")
         
-        # ===== TOP BORDER =====
+        # ===== HEADER ROW (FULL BOX) =====
         for c in range(1, last_col + 1):
         
-            cell = ws.cell(TABLE_HEADER_ROW, c)
-        
-            cell.border = Border(
-                top=THICK_SIDE,
-                left=cell.border.left,
-                right=cell.border.right,
-                bottom=cell.border.bottom
+            ws.cell(TABLE_HEADER_ROW, c).border = Border(
+                top=THICK,
+                bottom=THICK,
+                left=THICK if c == 1 else THIN,
+                right=THICK if c == last_col else THIN
             )
         
-        # ===== BOTTOM BORDER =====
+        # ===== TOTAL ROW (FULL BOX) =====
         for c in range(1, last_col + 1):
         
-            cell = ws.cell(total_row, c)
-        
-            cell.border = Border(
-                bottom=THICK_SIDE,
-                left=cell.border.left,
-                right=cell.border.right,
-                top=cell.border.top
+            ws.cell(total_row, c).border = Border(
+                top=THICK,
+                bottom=THICK,
+                left=THICK if c == 1 else THIN,
+                right=THICK if c == last_col else THIN
             )
         
-        # ===== LEFT BORDER =====
-        for r in range(TABLE_HEADER_ROW, total_row + 1):
+        # ===== LEFT & RIGHT BODY BORDER =====
+        for r in range(TABLE_HEADER_ROW + 1, total_row):
         
-            cell = ws.cell(r, 1)
+            # LEFT SIDE
+            left_cell = ws.cell(r, 1)
         
-            cell.border = Border(
-                left=THICK_SIDE,
-                top=cell.border.top,
-                right=cell.border.right,
-                bottom=cell.border.bottom
+            left_cell.border = Border(
+                left=THICK,
+                top=left_cell.border.top,
+                right=left_cell.border.right,
+                bottom=left_cell.border.bottom
             )
         
-        # ===== RIGHT BORDER =====
-        for r in range(TABLE_HEADER_ROW, total_row + 1):
+            # RIGHT SIDE
+            right_cell = ws.cell(r, last_col)
         
-            cell = ws.cell(r, last_col)
-        
-            cell.border = Border(
-                right=THICK_SIDE,
-                top=cell.border.top,
-                left=cell.border.left,
-                bottom=cell.border.bottom
+            right_cell.border = Border(
+                right=THICK,
+                top=right_cell.border.top,
+                left=right_cell.border.left,
+                bottom=right_cell.border.bottom
             )
-
-
         
+        
+                
         if ws.title != "Master":
         
             col_final = headers["% Final Delivery"]
