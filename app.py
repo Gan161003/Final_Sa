@@ -1656,7 +1656,7 @@ def run_sa_report():
         
             # ✅ FILL TOTAL ROW ONLY ACROSS TABLE (NOT FULL SHEET)
         
-                last_table_col = ws.max_column   # this is your table width
+        last_table_col = ws.max_column   # this is your table width
         
                 for c in range(1, last_table_col + 1):
                     cell = ws.cell(total_row, c)
@@ -1669,9 +1669,9 @@ def run_sa_report():
         
         # ================= MERGE GENRES + DIVIDER =================
         
-                if "Genres" in headers:
+        if "Genres" in headers:
                 
-                    THICK = Side(style="medium")
+        THICK = Side(style="medium")
                 
                     col_genre = headers["Genres"]
                 
