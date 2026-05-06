@@ -1735,6 +1735,50 @@ def run_sa_report():
                             vertical="center"
                         )
 
+                    # ================= OUTER TABLE BORDER =================
+
+                THICK_SIDE = Side(style="medium")
+        
+                # TOP BORDER
+                for c in range(1, ws.max_column + 1):
+        
+                    ws.cell(TABLE_HEADER_ROW, c).border = Border(
+                        top=THICK_SIDE,
+                        left=THIN,
+                        right=THIN,
+                        bottom=THIN
+                    )
+        
+                # BOTTOM BORDER
+                for c in range(1, ws.max_column + 1):
+        
+                    ws.cell(total_row, c).border = Border(
+                        bottom=THICK_SIDE,
+                        left=THIN,
+                        right=THIN,
+                        top=THIN
+                    )
+        
+                # LEFT BORDER
+                for r in range(TABLE_HEADER_ROW, total_row + 1):
+        
+                    ws.cell(r, 1).border = Border(
+                        left=THICK_SIDE,
+                        top=THIN,
+                        right=THIN,
+                        bottom=THIN
+                    )
+
+        # RIGHT BORDER
+        for r in range(TABLE_HEADER_ROW, total_row + 1):
+
+            ws.cell(r, ws.max_column).border = Border(
+                right=THICK_SIDE,
+                top=THIN,
+                left=THIN,
+                bottom=THIN
+            )
+
 
 
         
