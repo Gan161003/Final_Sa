@@ -2063,21 +2063,44 @@ def run_sa_report():
             # ================= WRITE TO EXCEL =================
             remarks_row = total_row + 2
         
-            ws.merge_cells(
-                start_row=remarks_row,
-                start_column=1,
-                end_row=remarks_row,
-                end_column=ws.max_column
-            )
+            # ws.merge_cells(
+            #     start_row=remarks_row,
+            #     start_column=1,
+            #     end_row=remarks_row,
+            #     end_column=ws.max_column
+            # )
         
             ws.cell(remarks_row, 1).value = "\n".join(remarks)
         
-            ws.cell(remarks_row, 1).font = Font(size=10, italic=True)
-            ws.cell(remarks_row, 1).alignment = Alignment(
-                horizontal="left",
-                vertical="center",
-                wrap_text=True
-            )
+            # ws.cell(remarks_row, 1).font = Font(size=10, italic=True)
+            # ws.cell(remarks_row, 1).alignment = Alignment(
+            #     horizontal="left",
+            #     vertical="center",
+            #     wrap_text=True
+            # )
+            # ===== SA REMARKS LABEL =====
+            ws.cell(remarks_row, 1).value = "SA Remarks:"
+            ws.cell(remarks_row, 1).font = Font(size=10, bold=True)
+        
+                # ===== REMARKS CONTENT =====
+            remarks_text = "\n".join(remarks[1:])
+                
+            ws.merge_cells(
+                    start_row=remarks_row,
+                    start_column=2,
+                    end_row=remarks_row,
+                    end_column=ws.max_column
+                )
+                
+            ws.cell(remarks_row, 2).value = remarks_text
+                
+            ws.cell(remarks_row, 2).font = Font(size=10, italic=True)
+                
+            ws.cell(remarks_row, 2).alignment = Alignment(
+                    horizontal="left",
+                    vertical="center",
+                    wrap_text=True
+                )    
 
                         
             COLUMN_WIDTHS = {
