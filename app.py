@@ -1466,8 +1466,12 @@ def run_sa_report():
         header_row = 1 if ws.title == "Master" else 8
         data_row = header_row + 1
 
+        # headers = {
+        #     ws.cell(header_row, c).value: c
+        #     for c in range(1, ws.max_column + 1)
+        # }
         headers = {
-            ws.cell(header_row, c).value: c
+            str(ws.cell(header_row, c).value).replace("\n", " "): c
             for c in range(1, ws.max_column + 1)
         }
 
