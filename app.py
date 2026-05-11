@@ -1399,7 +1399,7 @@ def run_sa_report():
     # ---------- Formatting ----------
     output.seek(0)
     # wb = load_workbook(output, data_only=True)
-      wb = load_workbook(output)
+    wb = load_workbook(output)
 
     
 
