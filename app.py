@@ -1430,7 +1430,18 @@ def run_sa_report():
     BLUE_COLS = [
     "Genres","Site","Unique Key","Objective/Targeting","Property/Inventory",
     "Ad Unit","Cost Format","Campaign Days","Monitoring Days",
-    "Start Date","End Date","Live Date"
+    "Start Date","End Date","Live Date","Genres",
+    "Site",
+    "Unique\nKey",
+    "Objective/\nTargeting",
+    "Property/\nInventory",
+    "Ad Unit",
+    "Cost\nFormat",
+    "Campaign\nDays",
+    "Monitoring\nDays",
+    "Start\nDate",
+    "End\nDate",
+    "Live\nDate"
     ]
 
     LIGHT_BLUE_COL = ["Deviation % v1 & CRAFT Plan"]
