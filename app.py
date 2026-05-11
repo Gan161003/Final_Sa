@@ -1339,16 +1339,14 @@ def run_sa_report():
                     "Deviation % Platform & CRAFT Delivery": "Deviation %\nPlatform & CRAFT Delivery",
                 }
                 
-                ws = writer.sheets[sheet_name]
+            ws = writer.sheets[sheet_name]
                 
-                header_row_excel = 8
+            header_row_excel = 8
                 
-                for col_num in range(1, ws.max_column + 1):
-                
+            for col_num in range(1, ws.max_column + 1):
                     cell = ws.cell(header_row_excel, col_num)
-                
                     if cell.value in DISPLAY_HEADERS:
-                        cell.value = DISPLAY_HEADERS[cell.value]
+                            cell.value = DISPLAY_HEADERS[cell.value]
                     
 
             # df_final.to_excel(
