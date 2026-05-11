@@ -1398,7 +1398,8 @@ def run_sa_report():
 
     # ---------- Formatting ----------
     output.seek(0)
-    wb = load_workbook(output, data_only=True)
+    # wb = load_workbook(output, data_only=True)
+      wb = load_workbook(output)
 
     
 
@@ -1482,7 +1483,7 @@ def run_sa_report():
         #     for c in range(1, ws.max_column + 1)
         # }
         headers = {
-            " ".join(str(ws.cell(header_row, c).value).split()): c
+            str(ws.cell(header_row, c).value).replace("\n", " "): c
             for c in range(1, ws.max_column + 1)
         }
 
@@ -1551,7 +1552,7 @@ def run_sa_report():
 
         # headers = {cell.value: i+1 for i, cell in enumerate(ws[TABLE_HEADER_ROW])}
         headers = {
-            " ".join(str(cell.value).split()): i + 1
+            str(cell.value).replace("\n", " "): i + 1
             for i, cell in enumerate(ws[TABLE_HEADER_ROW])
         }
         WHOLE_PERCENT = [
