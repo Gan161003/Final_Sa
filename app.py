@@ -1957,8 +1957,8 @@ def run_sa_report():
     st.download_button(
         "⬇️ Download SA Report",
         data=final_output.getvalue(),
-        file_name=f"SA_Report_{brand_name}_{qt_number}.xlsx",
-        # file_name="SA_Report.xlsx",
+        # file_name=f"SA_Report_{brand_name}_{qt_number}.xlsx",
+        file_name="SA_Report.xlsx",
         mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     )
 
