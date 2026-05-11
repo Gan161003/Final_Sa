@@ -863,7 +863,7 @@ def run_sa_report():
         media_plan_items[sheet] = pd.DataFrame(rows)
 
 
-    st.success("✅ Phase 4 FIXED — Planned Delivery v1 now matches Buy Type correctly")
+    st.success("✅Planned Delivery v1 now matches Buy Type correctly")
 
 
 
@@ -1155,7 +1155,7 @@ def run_sa_report():
         df["Actual Delivered Reporting SA"] = actuals
         df["Live Date"] = lives
 
-    st.success("✅ Phase 6 COMPLETE — Correct Data Pulled from Cleaned DF")
+    st.success("✅ Correct Data Pulled from Cleaned DF")
 
 
     # phase 7
@@ -1226,7 +1226,7 @@ def run_sa_report():
         ]
 
 
-    st.success("✅ Phase 7 completed — calculations added safely for all tabs")
+    st.success("✅ calculations added safely for all tabs")
 
 
 
