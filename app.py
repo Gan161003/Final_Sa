@@ -1526,7 +1526,9 @@ def run_sa_report():
                     headers.get("Objective/Targeting"),
                     headers.get("Objective/ Targeting"),
                     headers.get("Property/Inventory"),
-                    headers.get("Property/ Inventory")
+                    headers.get("Property/ Inventory"),
+                    headers.get("Ad Unit"),
+                    headers.get("AdUnit")
                 ]:
                     cell.alignment = Alignment(
                         horizontal="left",
