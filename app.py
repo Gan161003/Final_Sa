@@ -157,6 +157,18 @@ def run_sa_report():
                 "Engagements": ["postengagements"]
             }
         },
+        "Universal_Cleaner": {
+            "identify": ["unique_key","creative","date","impressions","clicks","views","spends","engagements"],
+        
+            "mapping": {
+                "Unique Key": ["unique_key"],   
+                "Date": ["date"],
+                "Impressions": ["impressions"],
+                "Clicks": ["clicks"],
+                "Views": ["views"],
+                "Spends": ["spends"],
+                "Engagements": ["engagements"]}
+        },
 
         "Sizmek": {
             "identify": [
