@@ -1318,7 +1318,7 @@ def run_sa_report():
 
                 # ================= HEADER DISPLAY WRAP =================
 
-                DISPLAY_HEADERS = {
+            DISPLAY_HEADERS = {
                     "Unique Key": "Unique\nKey",
                     "Objective/Targeting": "Objective/\nTargeting",
                     "Property/Inventory": "Property/\nInventory",
