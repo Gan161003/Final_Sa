@@ -1283,14 +1283,22 @@ def run_sa_report():
             df_final = df.reindex(columns=FINAL_COLUMNS)
 
             # df_final.to_excel(writer, sheet_name=ad_type[:31], index=False)
-            sheet_name = ad_type[:31]
-
+            # sheet_name = ad_type[:31]
+            # sheet_name = get_genre_name(ad_type)[:31]
+            sheet_name = get_genre_name(ad_type)[:31]
             df_final.to_excel(
                 writer,
                 sheet_name=sheet_name,
                 index=False,
-                startrow=7   # pushes table down
-            )
+                startrow=7)
+                    
+
+            # df_final.to_excel(
+            #     writer,
+            #     sheet_name=sheet_name,
+            #     index=False,
+            #     startrow=7   # pushes table down
+            # )
 
             ws = writer.sheets[sheet_name]
 
