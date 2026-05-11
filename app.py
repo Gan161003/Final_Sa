@@ -1531,7 +1531,7 @@ def run_sa_report():
                     cell.alignment = Alignment(
                         horizontal="left",
                         vertical="center",
-                        wrap_text=True
+                        wrap_text=False
                     )
                 else:
                     cell.alignment = CENTER    
