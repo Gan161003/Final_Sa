@@ -2079,28 +2079,30 @@ def run_sa_report():
             #     wrap_text=True
             # )
             # ===== SA REMARKS LABEL =====
+                # ===== LABEL =====
             ws.cell(remarks_row, 1).value = "SA Remarks:"
             ws.cell(remarks_row, 1).font = Font(size=10, bold=True)
-        
-                # ===== REMARKS CONTENT =====
+                
+                # ===== REMARKS IN NEXT ROW =====
             remarks_text = "\n".join(remarks[1:])
+            next_row = remarks_row + 1
                 
             ws.merge_cells(
-                    start_row=remarks_row,
-                    start_column=2,
-                    end_row=remarks_row,
+                    start_row=next_row,
+                    start_column=1,
+                    end_row=next_row,
                     end_column=ws.max_column
                 )
                 
-            ws.cell(remarks_row, 2).value = remarks_text
+            ws.cell(next_row, 1).value = remarks_text
                 
-            ws.cell(remarks_row, 2).font = Font(size=10, italic=True)
+            ws.cell(next_row, 1).font = Font(size=10, italic=True)
                 
-            ws.cell(remarks_row, 2).alignment = Alignment(
+            ws.cell(next_row, 1).alignment = Alignment(
                     horizontal="left",
                     vertical="center",
                     wrap_text=True
-                )    
+                )
 
                         
             COLUMN_WIDTHS = {
