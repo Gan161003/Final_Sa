@@ -1538,7 +1538,11 @@ def run_sa_report():
             TABLE_HEADER_ROW = 8
             DATA_START_ROW = TABLE_HEADER_ROW + 1
 
-        headers = {cell.value: i+1 for i, cell in enumerate(ws[TABLE_HEADER_ROW])}
+        # headers = {cell.value: i+1 for i, cell in enumerate(ws[TABLE_HEADER_ROW])}
+        headers = {
+            " ".join(str(cell.value).split()): i + 1
+            for i, cell in enumerate(ws[TABLE_HEADER_ROW])
+        }
         WHOLE_PERCENT = [
             "% v1 Delivery",
             "% Final Delivery",
