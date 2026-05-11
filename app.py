@@ -756,6 +756,23 @@ def run_sa_report():
 
     for sheet in ad_type_sheets:
 
+
+        def get_genre_name(sheet_name):
+
+            s = str(sheet_name).lower()
+        
+            # AMAZON
+            if "amz" in s:
+                return "Amazon"
+        
+            # FLIPKART
+            if "fkt" in s:
+                return "Flipkart"
+        
+            # DEFAULT
+            return sheet_name
+        
+
         raw = media_xl.parse(sheet, header=None)
 
         # ---- detect header row ----
@@ -830,7 +847,8 @@ def run_sa_report():
                 planned_v1 = r.get(col_map["est_leads"])
 
             rows.append({
-                "Genres": sheet,
+                # "Genres": sheet,
+                "Genres": get_genre_name(sheet),
                 "Site": r.get(col_map["publisher"]),
                 "Unique Key": uk,
                 "Objective/Targeting": r.get(col_map["objective"]),
