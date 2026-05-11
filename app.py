@@ -1245,37 +1245,37 @@ def run_sa_report():
 
 
 
-    # FINAL_COLUMNS = [
-    #     "Genres","Site","Unique Key","Objective/Targeting","Property/Inventory",
-    #     "Ad Unit","Cost Format","Campaign Days","Monitoring Days",
-    #     "Start Date","End Date","Live Date",
-    #     "Planned Delivery v1","CRAFT Planned Delivery",
-    #     "Actual Delivered Reporting SA","CRAFT Reported Delivery",
-    #     "% v1 Delivery","% Final Delivery","Total KPI Achieved",
-    #     "Deviation % v1 & CRAFT Plan","Deviation % Platform & CRAFT Delivery",
-    # ]
     FINAL_COLUMNS = [
-            "Genres",
-            "Site",
-            "Unique\nKey",
-            "Objective/\nTargeting",
-            "Property/\nInventory",
-            "Ad Unit",
-            "Cost\nFormat",
-            "Campaign\nDays",
-            "Monitoring\nDays",
-            "Start\nDate",
-            "End\nDate",
-            "Live\nDate",
-            "Planned\nDelivery v1",
-            "CRAFT Planned\nDelivery",
-            "Actual Delivered\nReporting SA",
-            "CRAFT Reported\nDelivery",
-            "% v1\nDelivery",
-            "% Final\nDelivery",
-            "Total KPI\nAchieved",
-            "Deviation %\nv1 & CRAFT Plan",
-            "Deviation %\nPlatform & CRAFT Delivery"]
+        "Genres","Site","Unique Key","Objective/Targeting","Property/Inventory",
+        "Ad Unit","Cost Format","Campaign Days","Monitoring Days",
+        "Start Date","End Date","Live Date",
+        "Planned Delivery v1","CRAFT Planned Delivery",
+        "Actual Delivered Reporting SA","CRAFT Reported Delivery",
+        "% v1 Delivery","% Final Delivery","Total KPI Achieved",
+        "Deviation % v1 & CRAFT Plan","Deviation % Platform & CRAFT Delivery",
+    ]
+    # FINAL_COLUMNS = [
+    #         "Genres",
+    #         "Site",
+    #         "Unique\nKey",
+    #         "Objective/\nTargeting",
+    #         "Property/\nInventory",
+    #         "Ad Unit",
+    #         "Cost\nFormat",
+    #         "Campaign\nDays",
+    #         "Monitoring\nDays",
+    #         "Start\nDate",
+    #         "End\nDate",
+    #         "Live\nDate",
+    #         "Planned\nDelivery v1",
+    #         "CRAFT Planned\nDelivery",
+    #         "Actual Delivered\nReporting SA",
+    #         "CRAFT Reported\nDelivery",
+    #         "% v1\nDelivery",
+    #         "% Final\nDelivery",
+    #         "Total KPI\nAchieved",
+    #         "Deviation %\nv1 & CRAFT Plan",
+    #         "Deviation %\nPlatform & CRAFT Delivery"]
  
 
     # ---------- Add campaign & monitoring days ----------
@@ -1315,6 +1315,40 @@ def run_sa_report():
                 sheet_name=sheet_name,
                 index=False,
                 startrow=7)
+
+                # ================= HEADER DISPLAY WRAP =================
+
+                DISPLAY_HEADERS = {
+                    "Unique Key": "Unique\nKey",
+                    "Objective/Targeting": "Objective/\nTargeting",
+                    "Property/Inventory": "Property/\nInventory",
+                    "Cost Format": "Cost\nFormat",
+                    "Campaign Days": "Campaign\nDays",
+                    "Monitoring Days": "Monitoring\nDays",
+                    "Start Date": "Start\nDate",
+                    "End Date": "End\nDate",
+                    "Live Date": "Live\nDate",
+                    "Planned Delivery v1": "Planned\nDelivery v1",
+                    "CRAFT Planned Delivery": "CRAFT Planned\nDelivery",
+                    "Actual Delivered Reporting SA": "Actual Delivered\nReporting SA",
+                    "CRAFT Reported Delivery": "CRAFT Reported\nDelivery",
+                    "% v1 Delivery": "% v1\nDelivery",
+                    "% Final Delivery": "% Final\nDelivery",
+                    "Total KPI Achieved": "Total KPI\nAchieved",
+                    "Deviation % v1 & CRAFT Plan": "Deviation %\nv1 & CRAFT Plan",
+                    "Deviation % Platform & CRAFT Delivery": "Deviation %\nPlatform & CRAFT Delivery",
+                }
+                
+                ws = writer.sheets[sheet_name]
+                
+                header_row_excel = 8
+                
+                for col_num in range(1, ws.max_column + 1):
+                
+                    cell = ws.cell(header_row_excel, col_num)
+                
+                    if cell.value in DISPLAY_HEADERS:
+                        cell.value = DISPLAY_HEADERS[cell.value]
                     
 
             # df_final.to_excel(
