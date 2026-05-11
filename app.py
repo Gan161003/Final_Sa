@@ -1362,7 +1362,12 @@ def run_sa_report():
 
     CENTER = Alignment(horizontal="center", vertical="center", wrap_text=False)
 
-    HEADER_CENTER = Alignment(horizontal="center",vertical="center",wrap_text=True)
+    HEADER_CENTER = Alignment(
+            horizontal="center",
+            vertical="center",
+            wrap_text=True,
+            text_rotation=0
+        )
 
     THIN = Side(style="thin")
     BORDER = Border(left=THIN, right=THIN, top=THIN, bottom=THIN)
