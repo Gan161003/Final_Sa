@@ -1685,7 +1685,7 @@ def run_sa_report():
         ws.cell(total_row, col_pct_v1).number_format = "0%"
         ws.cell(total_row, col_pct_final).number_format = "0%"
         ws.cell(total_row, col_kpi).number_format = "0%"
-        ws.cell(total_row, col_dev_plan).number_format = "0%"
+        ws.cell(total_row, col_dev_plan).number_format = "0.00%"
         ws.cell(total_row, col_dev_platform).number_format = "0.00%"
 
             # ================= FIXED KPI MERGE (FINAL) =================
