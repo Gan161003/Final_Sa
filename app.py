@@ -1401,6 +1401,9 @@ def run_sa_report():
     wb = load_workbook(output, data_only=True)
     # wb = load_workbook(output)
     
+    for ws in wb.worksheets:
+            ws.sheet_view.zoomScale = 65
+    
 
     
 
@@ -1543,7 +1546,7 @@ def run_sa_report():
                         # 👉 Apply Indian number format
                 if isinstance(cell.value, (int, float)):
                     cell.number_format = '#,##,##0'
-    ws.sheet_view.zoomScale = 65
+
     FILL_UNDER = PatternFill("solid", fgColor="FFC000")
     FILL_OVER = PatternFill("solid", fgColor="FFCCFF")
     FILL_NA = PatternFill("solid", fgColor="9933FF")
