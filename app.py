@@ -1245,16 +1245,38 @@ def run_sa_report():
 
 
 
+    # FINAL_COLUMNS = [
+    #     "Genres","Site","Unique Key","Objective/Targeting","Property/Inventory",
+    #     "Ad Unit","Cost Format","Campaign Days","Monitoring Days",
+    #     "Start Date","End Date","Live Date",
+    #     "Planned Delivery v1","CRAFT Planned Delivery",
+    #     "Actual Delivered Reporting SA","CRAFT Reported Delivery",
+    #     "% v1 Delivery","% Final Delivery","Total KPI Achieved",
+    #     "Deviation % v1 & CRAFT Plan","Deviation % Platform & CRAFT Delivery",
+    # ]
     FINAL_COLUMNS = [
-        "Genres","Site","Unique Key","Objective/Targeting","Property/Inventory",
-        "Ad Unit","Cost Format","Campaign Days","Monitoring Days",
-        "Start Date","End Date","Live Date",
-        "Planned Delivery v1","CRAFT Planned Delivery",
-        "Actual Delivered Reporting SA","CRAFT Reported Delivery",
-        "% v1 Delivery","% Final Delivery","Total KPI Achieved",
-        "Deviation % v1 & CRAFT Plan","Deviation % Platform & CRAFT Delivery",
-    ]
-
+            "Genres",
+            "Site",
+            "Unique\nKey",
+            "Objective/\nTargeting",
+            "Property/\nInventory",
+            "Ad Unit",
+            "Cost\nFormat",
+            "Campaign\nDays",
+            "Monitoring\nDays",
+            "Start\nDate",
+            "End\nDate",
+            "Live\nDate",
+            "Planned\nDelivery v1",
+            "CRAFT Planned\nDelivery",
+            "Actual Delivered\nReporting SA",
+            "CRAFT Reported\nDelivery",
+            "% v1\nDelivery",
+            "% Final\nDelivery",
+            "Total KPI\nAchieved",
+            "Deviation %\nv1 & CRAFT Plan",
+            "Deviation %\nPlatform & CRAFT Delivery"]
+ 
 
     # ---------- Add campaign & monitoring days ----------
 
