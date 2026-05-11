@@ -14,11 +14,11 @@ st.set_page_config(
 
 st.title("📊 SA Report Automation V7")
 
-st.page_link(
-    "pages/clean.py",
-    label="🧹 Open Media Cleaner",
-    icon="📂"
-)
+# st.page_link(
+#     "pages/clean.py",
+#     label="🧹 Open Media Cleaner",
+#     icon="📂"
+# )
 # =====================================================
 # PHASE 1 — FILE UPLOAD + CLEANING + READY FOR NEXT STEP
 # =====================================================
