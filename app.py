@@ -1362,6 +1362,8 @@ def run_sa_report():
 
     CENTER = Alignment(horizontal="center", vertical="center", wrap_text=False)
 
+    HEADER_CENTER = Alignment(horizontal="center",vertical="center",wrap_text=True)
+
     THIN = Side(style="thin")
     BORDER = Border(left=THIN, right=THIN, top=THIN, bottom=THIN)
 
@@ -1427,7 +1429,8 @@ def run_sa_report():
                 cell.fill = GREEN
 
             cell.font = HEADER_FONT
-            cell.alignment = CENTER
+            # cell.alignment = CENTER
+            cell.alignment = HEADER_CENTER
             cell.border = BORDER
 
         # ===== Table body =====
