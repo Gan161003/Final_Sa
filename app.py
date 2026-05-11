@@ -1407,6 +1407,7 @@ def run_sa_report():
                 ws[f"B{r}"].fill = LIGHT_GREY
                 ws[f"A{r}"].border = BORDER
                 ws[f"B{r}"].border = BORDER
+                
 
         header_row = 1 if ws.title == "Master" else 8
         data_row = header_row + 1
@@ -1981,6 +1982,47 @@ def run_sa_report():
                 vertical="center",
                 wrap_text=True
             )
+
+                        
+            COLUMN_WIDTHS = {
+                
+                    "Genres": 14,
+                    "Site": 14,
+                    "Unique Key": 18,
+                    "Objective/Targeting": 22,
+                    "Property/Inventory": 22,
+                    "Ad Unit": 16,
+                    "Cost Format": 14,
+                
+                    "Campaign Days": 12,
+                    "Monitoring Days": 12,
+                
+                    "Start Date": 12,
+                    "End Date": 12,
+                    "Live Date": 12,
+                
+                    "Planned Delivery v1": 16,
+                    "CRAFT Planned Delivery": 18,
+                    "Actual Delivered Reporting SA": 20,
+                    "CRAFT Reported Delivery": 18,
+                
+                    "% v1 Delivery": 12,
+                    "% Final Delivery": 12,
+                    "Total KPI Achieved": 14,
+                
+                    "Deviation % v1 & CRAFT Plan": 18,
+                    "Deviation % Platform & CRAFT Delivery": 20,
+                }
+                
+            for header, col_num in headers.items():
+                
+                    letter = get_column_letter(col_num)
+                
+                    width = COLUMN_WIDTHS.get(header, 15)
+                
+                    ws.column_dimensions[letter].width = width
+
+        
 
     final_output = BytesIO()
     wb.save(final_output)
