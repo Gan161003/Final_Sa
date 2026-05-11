@@ -2072,11 +2072,21 @@ def run_sa_report():
                     "Deviation % Platform & CRAFT Delivery": 20,
                 }
                 
-            for header, col_num in headers.items():
+            # for header, col_num in headers.items():
+                
+            #         letter = get_column_letter(col_num)
+                
+            #         width = COLUMN_WIDTHS.get(header, 15)
+                
+            #         ws.column_dimensions[letter].width = width
+
+        for header, col_num in headers.items():
+
+                    clean_header = header.replace("\n", " ")
                 
                     letter = get_column_letter(col_num)
                 
-                    width = COLUMN_WIDTHS.get(header, 15)
+                    width = COLUMN_WIDTHS.get(clean_header, 15)
                 
                     ws.column_dimensions[letter].width = width
 
