@@ -793,6 +793,8 @@ def run_sa_report():
 
         df = media_xl.parse(sheet, header=header_row).dropna(how="all")
 
+        df = df.ffill()
+
         # ---- column mapping (STRICT) ----
         col_map = {
             "publisher": find_column_strict(df, ["publisher"]) or find_column_strict(df, ["site"]),
