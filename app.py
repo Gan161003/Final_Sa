@@ -1400,6 +1400,7 @@ def run_sa_report():
     output.seek(0)
     wb = load_workbook(output, data_only=True)
     # wb = load_workbook(output)
+        ws.sheet_view.zoomScale = 65
 
     
 
