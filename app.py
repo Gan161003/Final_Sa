@@ -1398,8 +1398,8 @@ def run_sa_report():
 
     # ---------- Formatting ----------
     output.seek(0)
-    # wb = load_workbook(output, data_only=True)
-    wb = load_workbook(output)
+    wb = load_workbook(output, data_only=True)
+    # wb = load_workbook(output)
 
     
 
@@ -1442,7 +1442,9 @@ def run_sa_report():
     "Monitoring\nDays",
     "Start\nDate",
     "End\nDate",
-    "Live\nDate"
+    "Live\nDate",
+    "Objective/ Targeting",
+    "Property/ Inventory",
     ]
 
     LIGHT_BLUE_COL = ["Deviation % v1 & CRAFT Plan"]
