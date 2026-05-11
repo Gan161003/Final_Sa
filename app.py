@@ -1989,7 +1989,7 @@ def run_sa_report():
                     "Genres": 14,
                     "Site": 14,
                     "Unique Key": 18,
-                    "Objective/Targeting": 22,
+                    "Objective/Targeting": 16,
                     "Property/Inventory": 22,
                     "Ad Unit": 16,
                     "Cost Format": 14,
