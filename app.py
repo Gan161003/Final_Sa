@@ -1521,7 +1521,20 @@ def run_sa_report():
                         cell.value = "-"
                 cell.font = BODY_FONT
                 # cell.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
-                cell.alignment = CENTER
+                # cell.alignment = CENTER
+                if c in [
+                    headers.get("Objective/Targeting"),
+                    headers.get("Objective/ Targeting"),
+                    headers.get("Property/Inventory"),
+                    headers.get("Property/ Inventory")
+                ]:
+                    cell.alignment = Alignment(
+                        horizontal="left",
+                        vertical="center",
+                        wrap_text=True
+                    )
+                else:
+                    cell.alignment = CENTER    
                 cell.border = BORDER
                         # 👉 Apply Indian number format
                 if isinstance(cell.value, (int, float)):
