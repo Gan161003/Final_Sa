@@ -1471,7 +1471,7 @@ def run_sa_report():
         #     for c in range(1, ws.max_column + 1)
         # }
         headers = {
-            str(ws.cell(header_row, c).value).replace("\n", " "): c
+            " ".join(str(ws.cell(header_row, c).value).split()): c
             for c in range(1, ws.max_column + 1)
         }
 
