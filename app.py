@@ -790,9 +790,25 @@ def run_sa_report():
                 str(x).lower() for x in row.values if pd.notna(x)
             ])
             
-            if "unique" in row_text and "buy" in row_text:
-                header_row = i
-                break
+            required_headers = [
+                    "unique",
+                    "buy",
+                    "targeting",
+                    "phase",
+                    "channel",
+                    "funnel",
+                    "objective",
+                    "device",
+                    "genre",
+                    "publisher"
+                ]
+                
+                if all(col in row_text for col in required_headers):
+                    header_row = i
+                    break 
+            # if "unique" in row_text and "buy" in row_text:
+            #     header_row = i
+            #     break
 
         if header_row is None:
             continue
