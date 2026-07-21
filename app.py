@@ -1240,30 +1240,26 @@ def run_sa_report():
         craft_planned = df[col_craft_plan]
         craft_reported = df[col_craft_rep]
 
-        # df["% v1 Delivery"] = [
-        #     safe_div(a, p) for a, p in zip(actual, planned_v1)
-        # ]
+        df["% v1 Delivery"] = [
+            safe_div(a, p) for a, p in zip(actual, planned_v1)
+        ]
 
-        # df["% Final Delivery"] = [
-        #     safe_div(a, cp) for a, cp in zip(actual, craft_planned)
-        # ]
+        df["% Final Delivery"] = [
+            safe_div(a, cp) for a, cp in zip(actual, craft_planned)
+        ]
 
-        # df["Total KPI Achieved"] = df["% Final Delivery"]
+        df["Total KPI Achieved"] = df["% Final Delivery"]
 
-        # df["Deviation % v1 & CRAFT Plan"] = [
-        #     safe_diff_div(cp, p, p)
-        #     for cp, p in zip(craft_planned, planned_v1)
-        # ]
+        df["Deviation % v1 & CRAFT Plan"] = [
+            safe_diff_div(cp, p, p)
+            for cp, p in zip(craft_planned, planned_v1)
+        ]
 
-        # df["Deviation % Platform & CRAFT Delivery"] = [
-        #     safe_diff_div(a, cr, cr)
-        #     for a, cr in zip(actual, craft_reported)
-        # ]
-        df["% v1 Delivery"] = None
-        df["% Final Delivery"] = None
-        df["Total KPI Achieved"] = None
-        df["Deviation % v1 & CRAFT Plan"] = None
-        df["Deviation % Platform & CRAFT Delivery"] = None
+        df["Deviation % Platform & CRAFT Delivery"] = [
+            safe_diff_div(a, cr, cr)
+            for a, cr in zip(actual, craft_reported)
+        ]
+
 
     st.success("✅ calculations added safely for all tabs")
 
@@ -1379,50 +1375,6 @@ def run_sa_report():
                 }
                 
             ws = writer.sheets[sheet_name]
-            # headers = {
-            #         str(ws.cell(8, c).value).replace("\n", " "): c
-            #         for c in range(1, ws.max_column + 1)
-            #     }
-                
-            # for r in range(9, ws.max_row + 1):
-                
-            #         def col(name):
-            #             return get_column_letter(headers[name])
-                
-            #         # Campaign Days
-            #         ws[f"{col('Campaign Days')}{r}"] = (
-            #             f"={col('End Date')}{r}-{col('Start Date')}{r}+1"
-            #         )
-                
-            #         # Monitoring Days
-            #         ws[f"{col('Monitoring Days')}{r}"] = (
-            #             f'=IF({col("Live Date")}{r}="","",{col("End Date")}{r}-{col("Live Date")}{r}+1)'
-            #         )
-                
-            #         # % v1 Delivery
-            #         ws[f"{col('% v1 Delivery')}{r}"] = (
-            #             f'=IFERROR({col("Actual Delivered Reporting SA")}{r}/{col("Planned Delivery v1")}{r},"")'
-            #         )
-                
-            #         # % Final Delivery
-            #         ws[f"{col('% Final Delivery')}{r}"] = (
-            #             f'=IFERROR({col("Actual Delivered Reporting SA")}{r}/{col("CRAFT Planned Delivery")}{r},"")'
-            #         )
-                
-            #         # Total KPI
-            #         ws[f"{col('Total KPI Achieved')}{r}"] = (
-            #             f"={col('% Final Delivery')}{r}"
-            #         )
-                
-            #         # Deviation v1 & CRAFT Plan
-            #         ws[f"{col('Deviation % v1 & CRAFT Plan')}{r}"] = (
-            #             f'=IFERROR(({col("CRAFT Planned Delivery")}{r}-{col("Planned Delivery v1")}{r})/{col("Planned Delivery v1")}{r},"")'
-            #         )
-                
-            #         # Deviation Platform & CRAFT Delivery
-            #         ws[f"{col('Deviation % Platform & CRAFT Delivery')}{r}"] = (
-            #             f'=IFERROR(({col("Actual Delivered Reporting SA")}{r}-{col("CRAFT Reported Delivery")}{r})/{col("CRAFT Reported Delivery")}{r},"")'
-            #         )
                 
             header_row_excel = 8
                 
@@ -1440,60 +1392,6 @@ def run_sa_report():
             # )
 
             ws = writer.sheets[sheet_name]
-            headers = {
-                    str(ws.cell(8, c).value): c
-                    for c in range(1, ws.max_column + 1)
-                }
-            for r in range(9, ws.max_row + 1):
-                
-                    def col(name):
-                        return get_column_letter(headers[name])
-                
-                    # Campaign Days
-                    ws[f"{col('Campaign Days')}{r}"] = (
-                        f"={col('End Date')}{r}-{col('Start Date')}{r}+1"
-                    )
-                
-                    # Monitoring Days
-                    ws[f"{col('Monitoring Days')}{r}"] = (
-                        f'=IF({col("Live Date")}{r}="","",'
-                        f'{col("End Date")}{r}-{col("Live Date")}{r}+1)'
-                    )
-                
-                    # % v1 Delivery
-                    ws[f"{col('% v1 Delivery')}{r}"] = (
-                        f'=IFERROR('
-                        f'{col("Actual Delivered Reporting SA")}{r}/'
-                        f'{col("Planned Delivery v1")}{r},"")'
-                    )
-                
-                    # % Final Delivery
-                    ws[f"{col('% Final Delivery')}{r}"] = (
-                        f'=IFERROR('
-                        f'{col("Actual Delivered Reporting SA")}{r}/'
-                        f'{col("CRAFT Planned Delivery")}{r},"")'
-                    )
-                
-                    # KPI
-                    ws[f"{col('Total KPI Achieved')}{r}"] = (
-                        f'={col("% Final Delivery")}{r}'
-                    )
-                
-                    # Deviation v1 vs Craft Plan
-                    ws[f"{col('Deviation % v1 & CRAFT Plan')}{r}"] = (
-                        f'=IFERROR(('
-                        f'{col("CRAFT Planned Delivery")}{r}-'
-                        f'{col("Planned Delivery v1")}{r})/'
-                        f'{col("Planned Delivery v1")}{r},"")'
-                    )
-                
-                    # Deviation Platform vs Craft
-                    ws[f"{col('Deviation % Platform & CRAFT Delivery')}{r}"] = (
-                        f'=IFERROR(('
-                        f'{col("Actual Delivered Reporting SA")}{r}-'
-                        f'{col("CRAFT Reported Delivery")}{r})/'
-                        f'{col("CRAFT Reported Delivery")}{r},"")'
-                    )    
 
 
             # ---- Top info block ----
@@ -1513,40 +1411,24 @@ def run_sa_report():
 
             # ws["A5"] = "Campaign Duration"
             # ws["B5"] = f"{campaign_start.strftime('%d %b')} – {campaign_end.strftime('%d %b')}"
-            # ws.merge_cells("A1:C1")
-            # ws["A1"] = "Client: Samsung India"
-                
-            # ws.merge_cells("A2:C2")
-            # ws["A2"] = f"Brand: {brand_name}"
-                
-            # ws.merge_cells("A3:C3")
-            # ws["A3"] = (
-            #         f"Monitoring Dates: "
-            #         f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
-            #     )
-                
-            # ws.merge_cells("A4:C4")
-            # ws["A4"] = (
-            #         f"Campaign Duration: "
-            #         f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
-            #     )
-            ws.merge_cells("A1:E1")
+            ws.merge_cells("A1:C1")
             ws["A1"] = "Client: Samsung India"
                 
-            ws.merge_cells("A2:E2")
+            ws.merge_cells("A2:C2")
             ws["A2"] = f"Brand: {brand_name}"
                 
-            ws.merge_cells("A3:E3")
+            ws.merge_cells("A3:C3")
             ws["A3"] = (
                     f"Monitoring Dates: "
                     f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
                 )
                 
-            ws.merge_cells("A4:E4")
+            ws.merge_cells("A4:C4")
             ws["A4"] = (
                     f"Campaign Duration: "
                     f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
                 )
+
 
             
 
@@ -1554,11 +1436,11 @@ def run_sa_report():
             BOLD = Font(bold=True)
 
             
-            # for row in range(1, 5):
-            #         for col in ["A", "B", "C"]:
-            #             ws[f"{col}{row}"].fill = HEADER_FILL
+            for row in range(1, 5):
+                    for col in ["A", "B", "C"]:
+                        ws[f"{col}{row}"].fill = HEADER_FILL
                     
-                    # ws[f"A{row}"].font = BOLD
+                    ws[f"A{row}"].font = BOLD
 
             # for row in range(1, 6):
             #     ws[f"A{row}"].font = BOLD
@@ -1575,8 +1457,8 @@ def run_sa_report():
 
     # ---------- Formatting ----------
     output.seek(0)
-    # wb = load_workbook(output, data_only=True)
-    wb = load_workbook(output)
+    wb = load_workbook(output, data_only=True)
+    # wb = load_workbook(output)
     
     for ws in wb.worksheets:
             ws.sheet_view.zoomScale = 65
@@ -1649,40 +1531,15 @@ def run_sa_report():
             
 
         # ===== Header details section =====
-        # if ws.title != "Master":
-        #     for r in range(1,6):
-        #         ws[f"A{r}"].font = DETAIL_LABEL
-        #         ws[f"B{r}"].font = DETAIL_VALUE
-        #         ws[f"A{r}"].fill = LIGHT_GREY
-        #         ws[f"B{r}"].fill = LIGHT_GREY
-        #         ws[f"A{r}"].border = BORDER
-        #         ws[f"B{r}"].border = BORDER
         if ws.title != "Master":
-
-            THICK = Side(style="medium")
-        
-            for r in range(1, 5):
-                for c in range(1, 6):      # A:E
-                    cell = ws.cell(r, c)
-        
-                    cell.fill = LIGHT_GREY
-                    cell.font = DETAIL_LABEL
-                    cell.alignment = Alignment(
-                        horizontal="left",
-                        vertical="center"
-                    )
-        
-                    left = THICK if c == 1 else THIN
-                    right = THICK if c == 5 else THIN
-                    top = THICK if r == 1 else THIN
-                    bottom = THICK if r == 4 else THIN
-        
-                    cell.border = Border(
-                        left=left,
-                        right=right,
-                        top=top,
-                        bottom=bottom
-            )
+            for r in range(1,6):
+                ws[f"A{r}"].font = DETAIL_LABEL
+                ws[f"B{r}"].font = DETAIL_VALUE
+                ws[f"A{r}"].fill = LIGHT_GREY
+                ws[f"B{r}"].fill = LIGHT_GREY
+                ws[f"A{r}"].border = BORDER
+                ws[f"B{r}"].border = BORDER
+                
 
         header_row = 1 if ws.title == "Master" else 8
         data_row = header_row + 1
@@ -1792,72 +1649,20 @@ def run_sa_report():
         ]
 
         # -------- Whole % columns --------
-        # for col in WHOLE_PERCENT:
-
-        #     if col not in headers:
-        #         continue
-        
-        #     col_index = headers[col]
-        
-        #     for r in range(DATA_START_ROW, ws.max_row + 1):
-        
-        #         cell = ws.cell(r, col_index)
-        
-        #         # Formula? Don't touch it.
-        #         if isinstance(cell.value, str) and cell.value.startswith("="):
-        #             cell.number_format = "0%"
-        #             continue
-        
-        #         if cell.value in [None, "", "-"]:
-        #             continue
-        
-        #         try:
-        #             cell.value = float(cell.value)
-        #         except:
-        #             pass
-        
-        #         cell.number_format = "0%"
-        # for col in WHOLE_PERCENT:
-        #     if col in headers:
-        #         col_index = headers[col]
-        #         # for r in range(2, ws.max_row + 1):
-        #         DATA_START_ROW = TABLE_HEADER_ROW + 1
-
-        #         for r in range(DATA_START_ROW, ws.max_row + 1):
-        #             cell = ws.cell(r, col_index)
-
-        #             if cell.value not in [None, "", "-"]:
-        #                 cell.value = float(cell.value)
-        #             # if cell.value is not None:
-        #             #     cell.value = float(cell.value)
-        #                 cell.number_format = "0%"
-
         for col in WHOLE_PERCENT:
-            if col not in headers:
-                continue
-        
-            col_index = headers[col]
-        
-            for r in range(DATA_START_ROW, ws.max_row + 1):
-        
-                cell = ws.cell(r, col_index)
-        
-                # Leave Excel formulas exactly as they are
-                if isinstance(cell.value, str) and cell.value.startswith("="):
-                    cell.number_format = "0%"
-                    continue
-        
-                # Skip blanks
-                if cell.value in [None, "", "-"]:
-                    continue
-        
-                # Convert only numeric values
-                try:
-                    cell.value = float(cell.value)
-                except (ValueError, TypeError):
-                    pass
-        
-                cell.number_format = "0%"    
+            if col in headers:
+                col_index = headers[col]
+                # for r in range(2, ws.max_row + 1):
+                DATA_START_ROW = TABLE_HEADER_ROW + 1
+
+                for r in range(DATA_START_ROW, ws.max_row + 1):
+                    cell = ws.cell(r, col_index)
+
+                    if cell.value not in [None, "", "-"]:
+                        cell.value = float(cell.value)
+                    # if cell.value is not None:
+                    #     cell.value = float(cell.value)
+                        cell.number_format = "0%"
 
         # # -------- 2 Decimal % column --------
         # for col in TWO_DECIMAL_PERCENT:
@@ -1874,81 +1679,30 @@ def run_sa_report():
         #                 cell.value = float(cell.value)
         #                 cell.number_format = "0.00%"
             # -------- 2 Decimal % column --------
-        # for col in TWO_DECIMAL_PERCENT:
-
-        #     if col not in headers:
-        #         continue
-        
-        #     col_index = headers[col]
-        
-        #     for r in range(DATA_START_ROW, ws.max_row + 1):
-        
-        #         cell = ws.cell(r, col_index)
-        
-        #         # Formula? Leave it.
-        #         if isinstance(cell.value, str) and cell.value.startswith("="):
-        #             cell.number_format = "0.00%"
-        #             continue
-        
-        #         if cell.value in [None, "", "-"]:
-        #             continue
-        
-        #         try:
-        #             cell.value = float(cell.value)
-        #         except:
-        #             pass
-        
-        #         cell.number_format = "0.00%"
-        # for col in TWO_DECIMAL_PERCENT:
-        
-        #     if col in headers:
-        
-        #         col_index = headers[col]
-        
-        #         DATA_START_ROW = TABLE_HEADER_ROW + 1
-        
-        #         for r in range(DATA_START_ROW, ws.max_row + 1):
-        
-        #             cell = ws.cell(r, col_index)
-        
-        #             # HANDLE BLANKS
-        #             if cell.value in [None, "", "-"]:
-        #                 cell.value = 0
-        
-        #             # SAFE FLOAT CONVERSION
-        #             try:
-        #                 cell.value = float(cell.value)
-        #             except:
-        #                 cell.value = 0
-        
-        #             # ALWAYS SHOW 2 DECIMAL %
-        #             cell.number_format = "0.00%"
-
         for col in TWO_DECIMAL_PERCENT:
-            if col not in headers:
-                continue
         
-            col_index = headers[col]
+            if col in headers:
         
-            for r in range(DATA_START_ROW, ws.max_row + 1):
+                col_index = headers[col]
         
-                cell = ws.cell(r, col_index)
+                DATA_START_ROW = TABLE_HEADER_ROW + 1
         
-                # Leave formulas unchanged
-                if isinstance(cell.value, str) and cell.value.startswith("="):
+                for r in range(DATA_START_ROW, ws.max_row + 1):
+        
+                    cell = ws.cell(r, col_index)
+        
+                    # HANDLE BLANKS
+                    if cell.value in [None, "", "-"]:
+                        cell.value = 0
+        
+                    # SAFE FLOAT CONVERSION
+                    try:
+                        cell.value = float(cell.value)
+                    except:
+                        cell.value = 0
+        
+                    # ALWAYS SHOW 2 DECIMAL %
                     cell.number_format = "0.00%"
-                    continue
-        
-                # Skip blanks
-                if cell.value in [None, "", "-"]:
-                    continue
-        
-                try:
-                    cell.value = float(cell.value)
-                except (ValueError, TypeError):
-                    pass
-        
-                cell.number_format = "0.00%"    
 
 
         col_final = headers["% Final Delivery"]
