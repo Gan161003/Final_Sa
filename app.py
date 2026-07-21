@@ -803,7 +803,7 @@ def run_sa_report():
                     "publisher"
                 ]
                 
-                if all(col in row_text for col in required_headers):
+            if all(col in row_text for col in required_headers):
                     header_row = i
                     break 
             # if "unique" in row_text and "buy" in row_text:
