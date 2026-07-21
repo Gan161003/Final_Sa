@@ -1380,7 +1380,7 @@ def run_sa_report():
                     for c in range(1, ws.max_column + 1)
                 }
                 
-                for r in range(9, ws.max_row + 1):
+            for r in range(9, ws.max_row + 1):
                 
                     def col(name):
                         return get_column_letter(headers[name])
