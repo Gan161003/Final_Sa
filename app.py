@@ -1456,7 +1456,7 @@ def run_sa_report():
             #         for col in ["A", "B", "C"]:
             #             ws[f"{col}{row}"].fill = HEADER_FILL
                     
-                    ws[f"A{row}"].font = BOLD
+                    # ws[f"A{row}"].font = BOLD
 
             # for row in range(1, 6):
             #     ws[f"A{row}"].font = BOLD
