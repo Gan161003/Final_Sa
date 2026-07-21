@@ -1329,54 +1329,52 @@ def run_sa_report():
         )
 
 
-    # ---------- Write Excel ----------
-        
+   # ---------- Write Excel ----------
+
     output = BytesIO()
+
     with pd.ExcelWriter(output, engine="openpyxl") as writer:
-      
-            master_frames = []
-      
-            for ad_type, df in media_plan_items.items():
-        
-                    df_final = df.reindex(columns=FINAL_COLUMNS)
-        
-                    # df_final.to_excel(writer, sheet_name=ad_type[:31], index=False)
-                    # sheet_name = ad_type[:31]
-                    # sheet_name = get_genre_name(ad_type)[:31]
-                    sheet_name = get_genre_name(ad_type)[:31]
-                    df_final.to_excel(
-                        writer,
-                        sheet_name=sheet_name,
-                        index=False,
-                        startrow=7)
-        
-                        # ================= HEADER DISPLAY WRAP =================
-        
-                    DISPLAY_HEADERS = {
-                            "Unique Key": "Unique\nKey",
-                            "Objective/Targeting": "Objective/\nTargeting",
-                            "Property/Inventory": "Property/\nInventory",
-                            "Cost Format": "Cost\nFormat",
-                            "Campaign Days": "Campaign\nDays",
-                            "Monitoring Days": "Monitoring\nDays",
-                            "Start Date": "Start\nDate",
-                            "End Date": "End\nDate",
-                            "Live Date": "Live\nDate",
-                            "Planned Delivery v1": "Planned\nDelivery v1",
-                            "CRAFT Planned Delivery": "CRAFT Planned\nDelivery",
-                            "Actual Delivered Reporting SA": "Actual Delivered\nReporting SA",
-                            "CRAFT Reported Delivery": "CRAFT Reported\nDelivery",
-                            "% v1 Delivery": "% v1\nDelivery",
-                            "% Final Delivery": "% Final\nDelivery",
-                            "Total KPI Achieved": "Total KPI\nAchieved",
-                            "Deviation % v1 & CRAFT Plan": "Deviation %\nv1 & CRAFT Plan",
-                            "Deviation % Platform & CRAFT Delivery": "Deviation %\nPlatform & CRAFT Delivery",
-                        }
-                        
-                    ws = writer.sheets[sheet_name]
 
+        master_frames = []
 
-            
+        for ad_type, df in media_plan_items.items():
+
+            df_final = df.reindex(columns=FINAL_COLUMNS)
+
+            # df_final.to_excel(writer, sheet_name=ad_type[:31], index=False)
+            # sheet_name = ad_type[:31]
+            # sheet_name = get_genre_name(ad_type)[:31]
+            sheet_name = get_genre_name(ad_type)[:31]
+            df_final.to_excel(
+                writer,
+                sheet_name=sheet_name,
+                index=False,
+                startrow=7)
+
+                # ================= HEADER DISPLAY WRAP =================
+
+            DISPLAY_HEADERS = {
+                    "Unique Key": "Unique\nKey",
+                    "Objective/Targeting": "Objective/\nTargeting",
+                    "Property/Inventory": "Property/\nInventory",
+                    "Cost Format": "Cost\nFormat",
+                    "Campaign Days": "Campaign\nDays",
+                    "Monitoring Days": "Monitoring\nDays",
+                    "Start Date": "Start\nDate",
+                    "End Date": "End\nDate",
+                    "Live Date": "Live\nDate",
+                    "Planned Delivery v1": "Planned\nDelivery v1",
+                    "CRAFT Planned Delivery": "CRAFT Planned\nDelivery",
+                    "Actual Delivered Reporting SA": "Actual Delivered\nReporting SA",
+                    "CRAFT Reported Delivery": "CRAFT Reported\nDelivery",
+                    "% v1 Delivery": "% v1\nDelivery",
+                    "% Final Delivery": "% Final\nDelivery",
+                    "Total KPI Achieved": "Total KPI\nAchieved",
+                    "Deviation % v1 & CRAFT Plan": "Deviation %\nv1 & CRAFT Plan",
+                    "Deviation % Platform & CRAFT Delivery": "Deviation %\nPlatform & CRAFT Delivery",
+                }
+                
+            ws = writer.sheets[sheet_name]
             # headers = {
             #         str(ws.cell(8, c).value).replace("\n", " "): c
             #         for c in range(1, ws.max_column + 1)
@@ -1511,10 +1509,10 @@ def run_sa_report():
 
             master_frames.append(df_final)
 
-            if master_frames:
-                    pd.concat(master_frames).to_excel(
-                        writer, sheet_name="Master", index=False
-                    )
+        if master_frames:
+            pd.concat(master_frames).to_excel(
+                writer, sheet_name="Master", index=False
+            )
 
 
     # ---------- Formatting ----------
