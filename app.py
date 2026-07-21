@@ -1332,8 +1332,7 @@ def run_sa_report():
     # ---------- Write Excel ----------
         
     output = BytesIO()
-    try:
-        with pd.ExcelWriter(output, engine="openpyxl") as writer:
+    with pd.ExcelWriter(output, engine="openpyxl") as writer:
       
             master_frames = []
       
@@ -1517,10 +1516,6 @@ def run_sa_report():
                         writer, sheet_name="Master", index=False
                     )
 
-    except Exception as e:
-        import traceback
-        st.code(traceback.format_exc())
-        raise
 
     # ---------- Formatting ----------
     output.seek(0)
