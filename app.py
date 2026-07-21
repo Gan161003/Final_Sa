@@ -1411,20 +1411,20 @@ def run_sa_report():
 
             # ws["A5"] = "Campaign Duration"
             # ws["B5"] = f"{campaign_start.strftime('%d %b')} – {campaign_end.strftime('%d %b')}"
-                ws.merge_cells("A1:C1")
-                ws["A1"] = "Client: Samsung India"
+            ws.merge_cells("A1:C1")
+            ws["A1"] = "Client: Samsung India"
                 
-                ws.merge_cells("A2:C2")
-                ws["A2"] = f"Brand: {brand_name}"
+            ws.merge_cells("A2:C2")
+            ws["A2"] = f"Brand: {brand_name}"
                 
-                ws.merge_cells("A3:C3")
-                ws["A3"] = (
+            ws.merge_cells("A3:C3")
+            ws["A3"] = (
                     f"Monitoring Dates: "
                     f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
                 )
                 
-                ws.merge_cells("A4:C4")
-                ws["A4"] = (
+            ws.merge_cells("A4:C4")
+            ws["A4"] = (
                     f"Campaign Duration: "
                     f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
                 )
