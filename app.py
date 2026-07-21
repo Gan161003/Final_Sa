@@ -1734,45 +1734,45 @@ def run_sa_report():
         ]
 
         # -------- Whole % columns --------
-        for col in WHOLE_PERCENT:
-
-            if col not in headers:
-                continue
-        
-            col_index = headers[col]
-        
-            for r in range(DATA_START_ROW, ws.max_row + 1):
-        
-                cell = ws.cell(r, col_index)
-        
-                # Formula? Don't touch it.
-                if isinstance(cell.value, str) and cell.value.startswith("="):
-                    cell.number_format = "0%"
-                    continue
-        
-                if cell.value in [None, "", "-"]:
-                    continue
-        
-                try:
-                    cell.value = float(cell.value)
-                except:
-                    pass
-        
-                cell.number_format = "0%"
         # for col in WHOLE_PERCENT:
-        #     if col in headers:
-        #         col_index = headers[col]
-        #         # for r in range(2, ws.max_row + 1):
-        #         DATA_START_ROW = TABLE_HEADER_ROW + 1
 
-        #         for r in range(DATA_START_ROW, ws.max_row + 1):
-        #             cell = ws.cell(r, col_index)
+        #     if col not in headers:
+        #         continue
+        
+        #     col_index = headers[col]
+        
+        #     for r in range(DATA_START_ROW, ws.max_row + 1):
+        
+        #         cell = ws.cell(r, col_index)
+        
+        #         # Formula? Don't touch it.
+        #         if isinstance(cell.value, str) and cell.value.startswith("="):
+        #             cell.number_format = "0%"
+        #             continue
+        
+        #         if cell.value in [None, "", "-"]:
+        #             continue
+        
+        #         try:
+        #             cell.value = float(cell.value)
+        #         except:
+        #             pass
+        
+        #         cell.number_format = "0%"
+        for col in WHOLE_PERCENT:
+            if col in headers:
+                col_index = headers[col]
+                # for r in range(2, ws.max_row + 1):
+                DATA_START_ROW = TABLE_HEADER_ROW + 1
 
-        #             if cell.value not in [None, "", "-"]:
-        #                 cell.value = float(cell.value)
-        #             # if cell.value is not None:
-        #             #     cell.value = float(cell.value)
-        #                 cell.number_format = "0%"
+                for r in range(DATA_START_ROW, ws.max_row + 1):
+                    cell = ws.cell(r, col_index)
+
+                    if cell.value not in [None, "", "-"]:
+                        cell.value = float(cell.value)
+                    # if cell.value is not None:
+                    #     cell.value = float(cell.value)
+                        cell.number_format = "0%"
 
         # # -------- 2 Decimal % column --------
         # for col in TWO_DECIMAL_PERCENT:
@@ -1789,55 +1789,55 @@ def run_sa_report():
         #                 cell.value = float(cell.value)
         #                 cell.number_format = "0.00%"
             # -------- 2 Decimal % column --------
-        for col in TWO_DECIMAL_PERCENT:
-
-            if col not in headers:
-                continue
-        
-            col_index = headers[col]
-        
-            for r in range(DATA_START_ROW, ws.max_row + 1):
-        
-                cell = ws.cell(r, col_index)
-        
-                # Formula? Leave it.
-                if isinstance(cell.value, str) and cell.value.startswith("="):
-                    cell.number_format = "0.00%"
-                    continue
-        
-                if cell.value in [None, "", "-"]:
-                    continue
-        
-                try:
-                    cell.value = float(cell.value)
-                except:
-                    pass
-        
-                cell.number_format = "0.00%"
         # for col in TWO_DECIMAL_PERCENT:
+
+        #     if col not in headers:
+        #         continue
         
-        #     if col in headers:
+        #     col_index = headers[col]
         
-        #         col_index = headers[col]
+        #     for r in range(DATA_START_ROW, ws.max_row + 1):
         
-        #         DATA_START_ROW = TABLE_HEADER_ROW + 1
+        #         cell = ws.cell(r, col_index)
         
-        #         for r in range(DATA_START_ROW, ws.max_row + 1):
-        
-        #             cell = ws.cell(r, col_index)
-        
-        #             # HANDLE BLANKS
-        #             if cell.value in [None, "", "-"]:
-        #                 cell.value = 0
-        
-        #             # SAFE FLOAT CONVERSION
-        #             try:
-        #                 cell.value = float(cell.value)
-        #             except:
-        #                 cell.value = 0
-        
-        #             # ALWAYS SHOW 2 DECIMAL %
+        #         # Formula? Leave it.
+        #         if isinstance(cell.value, str) and cell.value.startswith("="):
         #             cell.number_format = "0.00%"
+        #             continue
+        
+        #         if cell.value in [None, "", "-"]:
+        #             continue
+        
+        #         try:
+        #             cell.value = float(cell.value)
+        #         except:
+        #             pass
+        
+        #         cell.number_format = "0.00%"
+        for col in TWO_DECIMAL_PERCENT:
+        
+            if col in headers:
+        
+                col_index = headers[col]
+        
+                DATA_START_ROW = TABLE_HEADER_ROW + 1
+        
+                for r in range(DATA_START_ROW, ws.max_row + 1):
+        
+                    cell = ws.cell(r, col_index)
+        
+                    # HANDLE BLANKS
+                    if cell.value in [None, "", "-"]:
+                        cell.value = 0
+        
+                    # SAFE FLOAT CONVERSION
+                    try:
+                        cell.value = float(cell.value)
+                    except:
+                        cell.value = 0
+        
+                    # ALWAYS SHOW 2 DECIMAL %
+                    cell.number_format = "0.00%"
 
 
         col_final = headers["% Final Delivery"]
