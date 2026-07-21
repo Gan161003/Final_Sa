@@ -2488,9 +2488,9 @@ def run_sa_report():
                 )
         
                 # KPI
-                ws[f"{cols['Total KPI Achieved']}{r}"] = (
-                    f"={cols['% Final Delivery']}{r}"
-                )
+                # ws[f"{cols['Total KPI Achieved']}{r}"] = (
+                #     f"={cols['% Final Delivery']}{r}"
+                # )
         
                 # Deviation Plan
                 ws[f"{cols['Deviation % v1 & CRAFT Plan']}{r}"] = (
