@@ -1240,26 +1240,30 @@ def run_sa_report():
         craft_planned = df[col_craft_plan]
         craft_reported = df[col_craft_rep]
 
-        df["% v1 Delivery"] = [
-            safe_div(a, p) for a, p in zip(actual, planned_v1)
-        ]
+        # df["% v1 Delivery"] = [
+        #     safe_div(a, p) for a, p in zip(actual, planned_v1)
+        # ]
 
-        df["% Final Delivery"] = [
-            safe_div(a, cp) for a, cp in zip(actual, craft_planned)
-        ]
+        # df["% Final Delivery"] = [
+        #     safe_div(a, cp) for a, cp in zip(actual, craft_planned)
+        # ]
 
-        df["Total KPI Achieved"] = df["% Final Delivery"]
+        # df["Total KPI Achieved"] = df["% Final Delivery"]
 
-        df["Deviation % v1 & CRAFT Plan"] = [
-            safe_diff_div(cp, p, p)
-            for cp, p in zip(craft_planned, planned_v1)
-        ]
+        # df["Deviation % v1 & CRAFT Plan"] = [
+        #     safe_diff_div(cp, p, p)
+        #     for cp, p in zip(craft_planned, planned_v1)
+        # ]
 
-        df["Deviation % Platform & CRAFT Delivery"] = [
-            safe_diff_div(a, cr, cr)
-            for a, cr in zip(actual, craft_reported)
-        ]
-
+        # df["Deviation % Platform & CRAFT Delivery"] = [
+        #     safe_diff_div(a, cr, cr)
+        #     for a, cr in zip(actual, craft_reported)
+        # ]
+        df["% v1 Delivery"] = None
+        df["% Final Delivery"] = None
+        df["Total KPI Achieved"] = None
+        df["Deviation % v1 & CRAFT Plan"] = None
+        df["Deviation % Platform & CRAFT Delivery"] = None
 
     st.success("✅ calculations added safely for all tabs")
 
@@ -1436,6 +1440,60 @@ def run_sa_report():
             # )
 
             ws = writer.sheets[sheet_name]
+            headers = {
+                    str(ws.cell(8, c).value): c
+                    for c in range(1, ws.max_column + 1)
+                }
+            for r in range(9, ws.max_row + 1):
+                
+                    def col(name):
+                        return get_column_letter(headers[name])
+                
+                    # Campaign Days
+                    ws[f"{col('Campaign Days')}{r}"] = (
+                        f"={col('End Date')}{r}-{col('Start Date')}{r}+1"
+                    )
+                
+                    # Monitoring Days
+                    ws[f"{col('Monitoring Days')}{r}"] = (
+                        f'=IF({col("Live Date")}{r}="","",'
+                        f'{col("End Date")}{r}-{col("Live Date")}{r}+1)'
+                    )
+                
+                    # % v1 Delivery
+                    ws[f"{col('% v1 Delivery')}{r}"] = (
+                        f'=IFERROR('
+                        f'{col("Actual Delivered Reporting SA")}{r}/'
+                        f'{col("Planned Delivery v1")}{r},"")'
+                    )
+                
+                    # % Final Delivery
+                    ws[f"{col('% Final Delivery')}{r}"] = (
+                        f'=IFERROR('
+                        f'{col("Actual Delivered Reporting SA")}{r}/'
+                        f'{col("CRAFT Planned Delivery")}{r},"")'
+                    )
+                
+                    # KPI
+                    ws[f"{col('Total KPI Achieved')}{r}"] = (
+                        f'={col("% Final Delivery")}{r}'
+                    )
+                
+                    # Deviation v1 vs Craft Plan
+                    ws[f"{col('Deviation % v1 & CRAFT Plan')}{r}"] = (
+                        f'=IFERROR(('
+                        f'{col("CRAFT Planned Delivery")}{r}-'
+                        f'{col("Planned Delivery v1")}{r})/'
+                        f'{col("Planned Delivery v1")}{r},"")'
+                    )
+                
+                    # Deviation Platform vs Craft
+                    ws[f"{col('Deviation % Platform & CRAFT Delivery')}{r}"] = (
+                        f'=IFERROR(('
+                        f'{col("Actual Delivered Reporting SA")}{r}-'
+                        f'{col("CRAFT Reported Delivery")}{r})/'
+                        f'{col("CRAFT Reported Delivery")}{r},"")'
+                    )    
 
 
             # ---- Top info block ----
