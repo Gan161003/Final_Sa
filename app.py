@@ -1437,10 +1437,10 @@ def run_sa_report():
 
             
             for row in range(1, 5):
-            for col in ["A", "B", "C"]:
-                ws[f"{col}{row}"].fill = HEADER_FILL
-            
-            ws[f"A{row}"].font = BOLD
+                    for col in ["A", "B", "C"]:
+                        ws[f"{col}{row}"].fill = HEADER_FILL
+                    
+                    ws[f"A{row}"].font = BOLD
 
             # for row in range(1, 6):
             #     ws[f"A{row}"].font = BOLD
