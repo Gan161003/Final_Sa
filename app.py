@@ -2464,27 +2464,27 @@ def run_sa_report():
         
                 # Campaign Days
                 ws[f"{cols['Campaign Days']}{r}"] = (
-                    f"={cols['End Date']}{r}-{cols['Start Date']}{r}+1"
+                    f'=IFERROR({cols["End Date"]}{r}-{cols["Start Date"]}{r}+1,"-")'
                 )
-        
+                        
                 # Monitoring Days
                 ws[f"{cols['Monitoring Days']}{r}"] = (
-                    f'=IF({cols["Live Date"]}{r}="","",'
-                    f'{cols["End Date"]}{r}-{cols["Live Date"]}{r}+1)'
+                    f'=IFERROR(IF({cols["Live Date"]}{r}="","",'
+                    f'{cols["End Date"]}{r}-{cols["Live Date"]}{r}+1),"-")'
                 )
         
                 # % v1 Delivery
                 ws[f"{cols['% v1 Delivery']}{r}"] = (
                     f'=IFERROR('
                     f'{cols["Actual Delivered Reporting SA"]}{r}/'
-                    f'{cols["Planned Delivery v1"]}{r},"")'
+                    f'{cols["Planned Delivery v1"]}{r},"-")'
                 )
         
                 # % Final Delivery
                 ws[f"{cols['% Final Delivery']}{r}"] = (
                     f'=IFERROR('
                     f'{cols["Actual Delivered Reporting SA"]}{r}/'
-                    f'{cols["CRAFT Planned Delivery"]}{r},"")'
+                    f'{cols["CRAFT Planned Delivery"]}{r},"-")'
                 )
         
                 # KPI column is merged, so write only once
@@ -2493,7 +2493,7 @@ def run_sa_report():
                 ws[f"{kpi_col}{DATA_START_ROW}"] = (
                     f'=IFERROR('
                     f'SUM({cols["Actual Delivered Reporting SA"]}{DATA_START_ROW}:{cols["Actual Delivered Reporting SA"]}{last_data_row})/'
-                    f'SUM({cols["CRAFT Planned Delivery"]}{DATA_START_ROW}:{cols["CRAFT Planned Delivery"]}{last_data_row}),""'
+                    f'SUM({cols["CRAFT Planned Delivery"]}{DATA_START_ROW}:{cols["CRAFT Planned Delivery"]}{last_data_row}),"-"'
                     f')'
                 )
         
@@ -2502,7 +2502,7 @@ def run_sa_report():
                     f'=IFERROR(('
                     f'{cols["CRAFT Planned Delivery"]}{r}-'
                     f'{cols["Planned Delivery v1"]}{r})/'
-                    f'{cols["Planned Delivery v1"]}{r},"")'
+                    f'{cols["Planned Delivery v1"]}{r},"0.00%")'
                 )
         
                 # Deviation Platform
@@ -2510,7 +2510,7 @@ def run_sa_report():
                     f'=IFERROR(('
                     f'{cols["Actual Delivered Reporting SA"]}{r}-'
                     f'{cols["CRAFT Reported Delivery"]}{r})/'
-                    f'{cols["CRAFT Reported Delivery"]}{r},"")'
+                    f'{cols["CRAFT Reported Delivery"]}{r},"0.00%")'
                 )
     
     wb.save(final_output)
