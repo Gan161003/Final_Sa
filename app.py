@@ -2310,12 +2310,12 @@ def run_sa_report():
             # ================= WRITE TO EXCEL =================
             remarks_row = total_row + 2
         
-            # ws.merge_cells(
-            #     start_row=remarks_row,
-            #     start_column=1,
-            #     end_row=remarks_row,
-            #     end_column=ws.max_column
-            # )
+            ws.merge_cells(
+                start_row=remarks_row,
+                start_column=1,
+                end_row=remarks_row,
+                end_column=ws.max_column
+            )
         
             ws.cell(remarks_row, 1).value = "\n".join(remarks)
         
