@@ -1512,10 +1512,10 @@ def run_sa_report():
 
             master_frames.append(df_final)
 
-        if master_frames:
-            pd.concat(master_frames).to_excel(
-                writer, sheet_name="Master", index=False
-            )
+                if master_frames:
+                    pd.concat(master_frames).to_excel(
+                        writer, sheet_name="Master", index=False
+                    )
 
         except Exception as e:
                 import traceback
