@@ -895,13 +895,26 @@ def run_sa_report():
     # --- detect header row ---
     craft_header = None
     for i in range(min(25, len(craft_raw))):
-        row = craft_raw.iloc[i].astype(str).str.lower()
-        # if "unique" in " ".join(row) and "planned" in " ".join(row):
-        row_text = " ".join(row.astype(str).str.lower())
+    for i in range(min(25, len(craft_raw))):
+            row = craft_raw.iloc[i]
+        
+            row_text = " ".join(
+                str(x).lower()
+                for x in row
+                if pd.notna(x)
+            )
+        
+            if "unique" in row_text and "planned" in row_text:
+                craft_header = i
+                break
+    #     row = craft_raw.iloc[i].astype(str).str.lower()
+    #     # if "unique" in " ".join(row) and "planned" in " ".join(row):
+    #     row_text = " ".join(row.astype(str).str.lower())
+        
 
-        if "unique" in row_text and "planned" in row_text:
-            craft_header = i
-            break
+        # if "unique" in row_text and "planned" in row_text:
+        #     craft_header = i
+        #     break
 
     if craft_header is None:
         st.error("CRAFT header not detected")
