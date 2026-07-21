@@ -1330,10 +1330,10 @@ def run_sa_report():
 
 
     # ---------- Write Excel ----------
-
-    output = BytesIO()
-    try:
-            with pd.ExcelWriter(output, engine="openpyxl") as writer:
+        
+            output = BytesIO()
+            try:
+                with pd.ExcelWriter(output, engine="openpyxl") as writer:
         
                 master_frames = []
         
@@ -1376,10 +1376,10 @@ def run_sa_report():
                         
                     ws = writer.sheets[sheet_name]
 
-    except Exception as e:
-            import traceback
-            st.code(traceback.format_exc())
-            raise
+            except Exception as e:
+                    import traceback
+                    st.code(traceback.format_exc())
+                    raise
             
             # headers = {
             #         str(ws.cell(8, c).value).replace("\n", " "): c
