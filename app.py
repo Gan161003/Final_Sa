@@ -1411,24 +1411,40 @@ def run_sa_report():
 
             # ws["A5"] = "Campaign Duration"
             # ws["B5"] = f"{campaign_start.strftime('%d %b')} – {campaign_end.strftime('%d %b')}"
-            ws.merge_cells("A1:C1")
+            # ws.merge_cells("A1:C1")
+            # ws["A1"] = "Client: Samsung India"
+                
+            # ws.merge_cells("A2:C2")
+            # ws["A2"] = f"Brand: {brand_name}"
+                
+            # ws.merge_cells("A3:C3")
+            # ws["A3"] = (
+            #         f"Monitoring Dates: "
+            #         f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
+            #     )
+                
+            # ws.merge_cells("A4:C4")
+            # ws["A4"] = (
+            #         f"Campaign Duration: "
+            #         f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
+            #     )
+            ws.merge_cells("A1:E1")
             ws["A1"] = "Client: Samsung India"
                 
-            ws.merge_cells("A2:C2")
+            ws.merge_cells("A2:E2")
             ws["A2"] = f"Brand: {brand_name}"
                 
-            ws.merge_cells("A3:C3")
+            ws.merge_cells("A3:E3")
             ws["A3"] = (
                     f"Monitoring Dates: "
                     f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
                 )
                 
-            ws.merge_cells("A4:C4")
+            ws.merge_cells("A4:E4")
             ws["A4"] = (
                     f"Campaign Duration: "
                     f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
                 )
-
 
             
 
@@ -1436,9 +1452,9 @@ def run_sa_report():
             BOLD = Font(bold=True)
 
             
-            for row in range(1, 5):
-                    for col in ["A", "B", "C"]:
-                        ws[f"{col}{row}"].fill = HEADER_FILL
+            # for row in range(1, 5):
+            #         for col in ["A", "B", "C"]:
+            #             ws[f"{col}{row}"].fill = HEADER_FILL
                     
                     ws[f"A{row}"].font = BOLD
 
@@ -1531,15 +1547,40 @@ def run_sa_report():
             
 
         # ===== Header details section =====
+        # if ws.title != "Master":
+        #     for r in range(1,6):
+        #         ws[f"A{r}"].font = DETAIL_LABEL
+        #         ws[f"B{r}"].font = DETAIL_VALUE
+        #         ws[f"A{r}"].fill = LIGHT_GREY
+        #         ws[f"B{r}"].fill = LIGHT_GREY
+        #         ws[f"A{r}"].border = BORDER
+        #         ws[f"B{r}"].border = BORDER
         if ws.title != "Master":
-            for r in range(1,6):
-                ws[f"A{r}"].font = DETAIL_LABEL
-                ws[f"B{r}"].font = DETAIL_VALUE
-                ws[f"A{r}"].fill = LIGHT_GREY
-                ws[f"B{r}"].fill = LIGHT_GREY
-                ws[f"A{r}"].border = BORDER
-                ws[f"B{r}"].border = BORDER
-                
+
+            THICK = Side(style="medium")
+        
+            for r in range(1, 5):
+                for c in range(1, 6):      # A:E
+                    cell = ws.cell(r, c)
+        
+                    cell.fill = LIGHT_GREY
+                    cell.font = DETAIL_LABEL
+                    cell.alignment = Alignment(
+                        horizontal="left",
+                        vertical="center"
+                    )
+        
+                    left = THICK if c == 1 else THIN
+                    right = THICK if c == 5 else THIN
+                    top = THICK if r == 1 else THIN
+                    bottom = THICK if r == 4 else THIN
+        
+                    cell.border = Border(
+                        left=left,
+                        right=right,
+                        top=top,
+                        bottom=bottom
+            )
 
         header_row = 1 if ws.title == "Master" else 8
         data_row = header_row + 1
