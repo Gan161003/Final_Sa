@@ -894,7 +894,7 @@ def run_sa_report():
 
     # --- detect header row ---
     craft_header = None
-    for i in range(min(25, len(craft_raw))):
+    # for i in range(min(25, len(craft_raw))):
     for i in range(min(25, len(craft_raw))):
             row = craft_raw.iloc[i]
         
