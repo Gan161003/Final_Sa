@@ -2334,12 +2334,12 @@ def run_sa_report():
             remarks_text = "\n".join(remarks[1:])
             next_row = remarks_row + 1
                 
-            # ws.merge_cells(
-            #         start_row=next_row,
-            #         start_column=1,
-            #         end_row=next_row,
-            #         end_column=ws.max_column
-            #     )
+            ws.merge_cells(
+                    start_row=next_row,
+                    start_column=1,
+                    end_row=next_row,
+                    end_column=ws.max_column
+                )
                 
             ws.cell(next_row, 1).value = remarks_text
                 
