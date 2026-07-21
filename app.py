@@ -1331,13 +1331,13 @@ def run_sa_report():
 
     # ---------- Write Excel ----------
         
-        output = BytesIO()
-        try:
-            with pd.ExcelWriter(output, engine="openpyxl") as writer:
-        
-                master_frames = []
-        
-                for ad_type, df in media_plan_items.items():
+    output = BytesIO()
+    try:
+        with pd.ExcelWriter(output, engine="openpyxl") as writer:
+      
+            master_frames = []
+      
+            for ad_type, df in media_plan_items.items():
         
                     df_final = df.reindex(columns=FINAL_COLUMNS)
         
@@ -1510,17 +1510,17 @@ def run_sa_report():
             #     ws[f"A{row}"].fill = HEADER_FILL
             #     ws[f"B{row}"].fill = HEADER_FILL
 
-        master_frames.append(df_final)
+            master_frames.append(df_final)
 
-        if master_frames:
+            if master_frames:
                     pd.concat(master_frames).to_excel(
                         writer, sheet_name="Master", index=False
                     )
 
-        except Exception as e:
-                import traceback
-                st.code(traceback.format_exc())
-                raise
+    except Exception as e:
+        import traceback
+        st.code(traceback.format_exc())
+        raise
 
     # ---------- Formatting ----------
     output.seek(0)
