@@ -2403,6 +2403,110 @@ def run_sa_report():
         
 
     final_output = BytesIO()
+
+    # =====================================================
+        # FINAL STEP - REPLACE VALUES WITH EXCEL FORMULAS
+        # =====================================================
+        
+        for ws in wb.worksheets:
+        
+            if ws.title == "Master":
+                continue
+        
+            TABLE_HEADER_ROW = 8
+            DATA_START_ROW = 9
+        
+            headers = {
+                str(cell.value).replace("\n", " "): i + 1
+                for i, cell in enumerate(ws[TABLE_HEADER_ROW])
+            }
+        
+            last_data_row = ws.max_row
+        
+            # Find total row
+            while last_data_row > DATA_START_ROW and ws.cell(last_data_row, 1).value in [None, ""]:
+                last_data_row -= 1
+        
+            total_row = last_data_row
+        
+            while total_row >= DATA_START_ROW:
+                if str(ws.cell(total_row, 1).value).strip().lower() == "total":
+                    break
+                total_row -= 1
+        
+            if total_row < DATA_START_ROW:
+                continue
+        
+            # Required columns
+            cols = {
+                name: get_column_letter(headers[name])
+                for name in [
+                    "Campaign Days",
+                    "Monitoring Days",
+                    "Start Date",
+                    "End Date",
+                    "Live Date",
+                    "Planned Delivery v1",
+                    "CRAFT Planned Delivery",
+                    "Actual Delivered Reporting SA",
+                    "CRAFT Reported Delivery",
+                    "% v1 Delivery",
+                    "% Final Delivery",
+                    "Total KPI Achieved",
+                    "Deviation % v1 & CRAFT Plan",
+                    "Deviation % Platform & CRAFT Delivery",
+                ]
+                if name in headers
+            }
+        
+            # Replace values only in DATA rows
+            for r in range(DATA_START_ROW, total_row):
+        
+                # Campaign Days
+                ws[f"{cols['Campaign Days']}{r}"] = (
+                    f"={cols['End Date']}{r}-{cols['Start Date']}{r}+1"
+                )
+        
+                # Monitoring Days
+                ws[f"{cols['Monitoring Days']}{r}"] = (
+                    f'=IF({cols["Live Date"]}{r}="","",'
+                    f'{cols["End Date"]}{r}-{cols["Live Date"]}{r}+1)'
+                )
+        
+                # % v1 Delivery
+                ws[f"{cols['% v1 Delivery']}{r}"] = (
+                    f'=IFERROR('
+                    f'{cols["Actual Delivered Reporting SA"]}{r}/'
+                    f'{cols["Planned Delivery v1"]}{r},"")'
+                )
+        
+                # % Final Delivery
+                ws[f"{cols['% Final Delivery']}{r}"] = (
+                    f'=IFERROR('
+                    f'{cols["Actual Delivered Reporting SA"]}{r}/'
+                    f'{cols["CRAFT Planned Delivery"]}{r},"")'
+                )
+        
+                # KPI
+                ws[f"{cols['Total KPI Achieved']}{r}"] = (
+                    f"={cols['% Final Delivery']}{r}"
+                )
+        
+                # Deviation Plan
+                ws[f"{cols['Deviation % v1 & CRAFT Plan']}{r}"] = (
+                    f'=IFERROR(('
+                    f'{cols["CRAFT Planned Delivery"]}{r}-'
+                    f'{cols["Planned Delivery v1"]}{r})/'
+                    f'{cols["Planned Delivery v1"]}{r},"")'
+                )
+        
+                # Deviation Platform
+                ws[f"{cols['Deviation % Platform & CRAFT Delivery']}{r}"] = (
+                    f'=IFERROR(('
+                    f'{cols["Actual Delivered Reporting SA"]}{r}-'
+                    f'{cols["CRAFT Reported Delivery"]}{r})/'
+                    f'{cols["CRAFT Reported Delivery"]}{r},"")'
+                )
     wb.save(final_output)
 
 
