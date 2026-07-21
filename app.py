@@ -1397,20 +1397,37 @@ def run_sa_report():
             # ---- Top info block ----
 
             
-            ws["A1"] = "Client"
-            ws["B1"] = "Samsung India"
+            # ws["A1"] = "Client"
+            # ws["B1"] = "Samsung India"
 
-            ws["A2"] = "Brand"
-            ws["B2"] = brand_name
+            # ws["A2"] = "Brand"
+            # ws["B2"] = brand_name
 
-            ws["A3"] = "Month"
-            ws["B3"] = campaign_start.strftime("%b %Y")
+            # ws["A3"] = "Month"
+            # ws["B3"] = campaign_start.strftime("%b %Y")
 
-            ws["A4"] = "Monitoring Period"
-            ws["B4"] = f"{campaign_start.strftime('%d %b')} – {campaign_end.strftime('%d %b')}"
+            # ws["A4"] = "Monitoring Period"
+            # ws["B4"] = f"{campaign_start.strftime('%d %b')} – {campaign_end.strftime('%d %b')}"
 
-            ws["A5"] = "Campaign Duration"
-            ws["B5"] = f"{campaign_start.strftime('%d %b')} – {campaign_end.strftime('%d %b')}"
+            # ws["A5"] = "Campaign Duration"
+            # ws["B5"] = f"{campaign_start.strftime('%d %b')} – {campaign_end.strftime('%d %b')}"
+        ws.merge_cells("A1:C1")
+        ws["A1"] = "Client: Samsung India"
+        
+        ws.merge_cells("A2:C2")
+        ws["A2"] = f"Brand: {brand_name}"
+        
+        ws.merge_cells("A3:C3")
+        ws["A3"] = (
+            f"Monitoring Dates: "
+            f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
+        )
+        
+        ws.merge_cells("A4:C4")
+        ws["A4"] = (
+            f"Campaign Duration: "
+            f"{campaign_start.strftime('%d %b')} - {campaign_end.strftime('%d %b')}"
+        )
 
 
             
@@ -1418,10 +1435,17 @@ def run_sa_report():
             HEADER_FILL = PatternFill("solid", fgColor="D9E1F2")
             BOLD = Font(bold=True)
 
-            for row in range(1, 6):
-                ws[f"A{row}"].font = BOLD
-                ws[f"A{row}"].fill = HEADER_FILL
-                ws[f"B{row}"].fill = HEADER_FILL
+            
+            for row in range(1, 5):
+            for col in ["A", "B", "C"]:
+                ws[f"{col}{row}"].fill = HEADER_FILL
+            
+            ws[f"A{row}"].font = BOLD
+
+            # for row in range(1, 6):
+            #     ws[f"A{row}"].font = BOLD
+            #     ws[f"A{row}"].fill = HEADER_FILL
+            #     ws[f"B{row}"].fill = HEADER_FILL
 
             master_frames.append(df_final)
 
