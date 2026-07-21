@@ -2405,10 +2405,10 @@ def run_sa_report():
     final_output = BytesIO()
 
     # =====================================================
-        # FINAL STEP - REPLACE VALUES WITH EXCEL FORMULAS
+    # FINAL STEP - REPLACE VALUES WITH EXCEL FORMULAS
         # =====================================================
         
-        for ws in wb.worksheets:
+    for ws in wb.worksheets:
         
             if ws.title == "Master":
                 continue
@@ -2507,6 +2507,7 @@ def run_sa_report():
                     f'{cols["CRAFT Reported Delivery"]}{r})/'
                     f'{cols["CRAFT Reported Delivery"]}{r},"")'
                 )
+    
     wb.save(final_output)
 
 
