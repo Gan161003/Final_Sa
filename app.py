@@ -1510,9 +1510,9 @@ def run_sa_report():
             #     ws[f"A{row}"].fill = HEADER_FILL
             #     ws[f"B{row}"].fill = HEADER_FILL
 
-            master_frames.append(df_final)
+        master_frames.append(df_final)
 
-                if master_frames:
+        if master_frames:
                     pd.concat(master_frames).to_excel(
                         writer, sheet_name="Master", index=False
                     )
