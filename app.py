@@ -2487,10 +2487,15 @@ def run_sa_report():
                     f'{cols["CRAFT Planned Delivery"]}{r},"")'
                 )
         
-                # KPI
-                # ws[f"{cols['Total KPI Achieved']}{r}"] = (
-                #     f"={cols['% Final Delivery']}{r}"
-                # )
+                # KPI column is merged, so write only once
+                kpi_col = cols["Total KPI Achieved"]
+                
+                ws[f"{kpi_col}{DATA_START_ROW}"] = (
+                    f'=IFERROR('
+                    f'SUM({cols["Actual Delivered Reporting SA"]}{DATA_START_ROW}:{cols["Actual Delivered Reporting SA"]}{last_data_row})/'
+                    f'SUM({cols["CRAFT Planned Delivery"]}{DATA_START_ROW}:{cols["CRAFT Planned Delivery"]}{last_data_row}),""'
+                    f')'
+                )
         
                 # Deviation Plan
                 ws[f"{cols['Deviation % v1 & CRAFT Plan']}{r}"] = (
