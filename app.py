@@ -1535,8 +1535,8 @@ def run_sa_report():
     HEADER_FONT = Font(size=12, color="FFFFFF", bold=True)
     BODY_FONT = Font(size=12)
     # bold=True,
-    DETAIL_LABEL = Font(size=10, color="FFFFFF")
-    DETAIL_VALUE = Font(size=10, color="FFFFFF")
+    DETAIL_LABEL = Font(size=10, color="FFFFFF", bold=True)
+    DETAIL_VALUE = Font(size=10, color="FFFFFF", bold=True)
 
     CENTER = Alignment(horizontal="center", vertical="center", wrap_text=False)
 
@@ -2343,7 +2343,7 @@ def run_sa_report():
                 
             ws.cell(next_row, 1).value = remarks_text
                 
-            ws.cell(next_row, 1).font = Font(size=10, italic=True)
+            ws.cell(next_row, 1).font = Font(size=10)
                 
             ws.cell(next_row, 1).alignment = Alignment(
                     horizontal="left",
