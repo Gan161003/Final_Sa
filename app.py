@@ -1375,6 +1375,50 @@ def run_sa_report():
                 }
                 
             ws = writer.sheets[sheet_name]
+            headers = {
+                    str(ws.cell(8, c).value).replace("\n", " "): c
+                    for c in range(1, ws.max_column + 1)
+                }
+                
+                for r in range(9, ws.max_row + 1):
+                
+                    def col(name):
+                        return get_column_letter(headers[name])
+                
+                    # Campaign Days
+                    ws[f"{col('Campaign Days')}{r}"] = (
+                        f"={col('End Date')}{r}-{col('Start Date')}{r}+1"
+                    )
+                
+                    # Monitoring Days
+                    ws[f"{col('Monitoring Days')}{r}"] = (
+                        f'=IF({col("Live Date")}{r}="","",{col("End Date")}{r}-{col("Live Date")}{r}+1)'
+                    )
+                
+                    # % v1 Delivery
+                    ws[f"{col('% v1 Delivery')}{r}"] = (
+                        f'=IFERROR({col("Actual Delivered Reporting SA")}{r}/{col("Planned Delivery v1")}{r},"")'
+                    )
+                
+                    # % Final Delivery
+                    ws[f"{col('% Final Delivery')}{r}"] = (
+                        f'=IFERROR({col("Actual Delivered Reporting SA")}{r}/{col("CRAFT Planned Delivery")}{r},"")'
+                    )
+                
+                    # Total KPI
+                    ws[f"{col('Total KPI Achieved')}{r}"] = (
+                        f"={col('% Final Delivery')}{r}"
+                    )
+                
+                    # Deviation v1 & CRAFT Plan
+                    ws[f"{col('Deviation % v1 & CRAFT Plan')}{r}"] = (
+                        f'=IFERROR(({col("CRAFT Planned Delivery")}{r}-{col("Planned Delivery v1")}{r})/{col("Planned Delivery v1")}{r},"")'
+                    )
+                
+                    # Deviation Platform & CRAFT Delivery
+                    ws[f"{col('Deviation % Platform & CRAFT Delivery')}{r}"] = (
+                        f'=IFERROR(({col("Actual Delivered Reporting SA")}{r}-{col("CRAFT Reported Delivery")}{r})/{col("CRAFT Reported Delivery")}{r},"")'
+                    )
                 
             header_row_excel = 8
                 
